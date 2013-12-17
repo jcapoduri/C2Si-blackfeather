@@ -18,7 +18,39 @@
                     "type": "string"
                 },
                 {
+                    "name": "password",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name" : "user_extends",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "username",
+                    "type": "string"
+                },
+                {
+                    "name": "email",
+                    "type": "string"
+                },
+                {
                     "name": "passwd",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name" : "personal_information",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "lastname",
                     "type": "string"
                 }
             ]

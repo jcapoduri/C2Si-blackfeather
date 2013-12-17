@@ -393,11 +393,7 @@ class neodymium {
                                 "unique" => true,
                                 "autoincremental" => true,
                                 "type" => "number"
-                        ),
-                        array(
-                                "name" => "user_id",
-                                "type" => "number"
-                        ),
+                        )
                         array(
                                 "name" => "ctime",
                                 "type" => "timestamp"
