@@ -17,13 +17,22 @@ define(['jquery',
         configModel
 ){
     var project = Backbone.Model.extend({
+        urlRoot : 'api/config',
         defaults: {
             "config" : new configModel(),
             "meta": {},
             "objects": new objCollection()
         },
         initialize: function() {
-            debugger;
+        },
+        parse: function(response, options) {
+            var parsed = {};
+            parsed.config = new configModel(response.config);
+            parsed.meta = response.meta;
+            parsed.objects = new objCollection(response.objects);
+
+            return parsed;
+
         }
     });
     return project;

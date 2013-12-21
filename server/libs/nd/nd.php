@@ -1,3 +1,5 @@
+<?php
+
 namespace Nd;
 
 class response {
@@ -67,14 +69,14 @@ class neodymium {
                                         break;
                                 case 'object':
                                         $return_obj[$item["name"]] = $this->readObject($item["object_name"], $row[$item["name"]]);
-                                        break;                                
+                                        break;
                                 default:
                                         $return_obj[$item["name"]] = $row[$item["name"]];
                                         break;
                         }
                 };
 
-                return $return_obj;        
+                return $return_obj;
         }
 
         public function readObject($obj_name, $id) {
@@ -91,7 +93,7 @@ class neodymium {
                 if (is_null($data)) return false;
                 $return_obj = $this->makeObject($obj, $data);
 
-                return $return_obj;                
+                return $return_obj;
         }
 
         public function readObjectList($obj_name) {
@@ -108,7 +110,7 @@ class neodymium {
                         while($row = $result->fetch_assoc()){
                                 $ret_array[] = $row;
                         };
-                        return $ret_array;                
+                        return $ret_array;
                 };
         }
 
@@ -127,14 +129,14 @@ class neodymium {
 
                 $i = 0;
                 $keys = array_keys($json);
-                $len = count($keys);        
+                $len = count($keys);
                 $values = array();
         $lists = array();
                 $tmp_value = null;
                 $tmp_field = null;
 
                 $relations = array();
-                for ($i = 0; $i < $len; $i++) {                
+                for ($i = 0; $i < $len; $i++) {
                         if ($keys[$i] == 'id') continue;
                         if (!isset($json[$keys[$i]])) continue;
                         $tmp_value = $json[$keys[$i]];
@@ -146,7 +148,7 @@ class neodymium {
                                         break;
                                 case 'object':
                                         $values[$tmp_field["name"]] = $this->storeObject($item["object_name"], $item);
-                                        break;                                
+                                        break;
                                 default:
                                         $values[$tmp_field["name"]] = $item;
                                         break;
@@ -161,10 +163,10 @@ class neodymium {
                 if ($result) {
                         $uid = $this->handler->insert_id;
             $len = count($lists);
-                        for ($i = 0; $i < $len; $i++) {                                        
+                        for ($i = 0; $i < $len; $i++) {
                                 $ok = $this->updateRelation($tmp_field["relation_name"], $uid, $item);
-                                if (!$ok) return false;                                
-                        };                        
+                                if (!$ok) return false;
+                        };
                         return $uid;
                 } else {
                         return false;
@@ -179,13 +181,13 @@ class neodymium {
 
                 $i = 0;
                 $keys = array_keys($json);
-                $len = count($keys);        
+                $len = count($keys);
                 $values = array();
                 $tmp_value = null;
                 $tmp_field = null;
 
                 $relations = array();
-                for ($i = 0; $i < $len; $i++) {                
+                for ($i = 0; $i < $len; $i++) {
                         if ($keys[$i] == 'id') continue;
                         if (!isset($json[$keys[$i]])) continue;
                         $tmp_value = $json[$keys[$i]];
@@ -198,7 +200,7 @@ class neodymium {
                                         break;
                                 case 'object':
                                         $values[$tmp_field["name"]] = $this->storeObject($item["object_name"], $item);
-                                        break;                                
+                                        break;
                                 default:
                                         $values[$tmp_field["name"]] = $item;
                                         break;
@@ -208,18 +210,18 @@ class neodymium {
                 $fields_update = array();
                 $keys = array_keys($values);
                 $len = count($values);
-                for ($i = 0; $i < $len; $i++) {        
+                for ($i = 0; $i < $len; $i++) {
                         array_push($fields_update, "`" . $keys[$i] . "` = '" . $values[$keys[$i]] . "'");
                 };
 
                 $query .= join(", ", $fields_update);
                 $query .= " WHERE id = " . $id. ' AND deleted = 0';
         var_dump($query);
-                return $this->handler->query($query);                
+                return $this->handler->query($query);
         }
 
         public function updateRelation($rel_name, $id, $json) {
-                $relation = $this->relations[$rel_name];                
+                $relation = $this->relations[$rel_name];
                 $obj_to = $this->objects[$relation["object_to"]];
 
                 $item = null;
@@ -227,24 +229,24 @@ class neodymium {
                 $len = count($json);
 
                 $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 1  WHERE father = " . $id . " AND deleted = 0";
-                var_dump($query);        
+                var_dump($query);
                 if (!$this->handler->query($query)) return false;
 
                 for ($i = 0; $i < $len; $i++) {
                         $item = $json[$i];
                         if (is_numeric($item)) {
                                 $query = "INSERT INTO " . $this->app["map"][$relation["name"]] . "(father, child) VALUES (" . $id . ", " . $item . ")";
-                var_dump($query);   
+                var_dump($query);
                                 if (!$this->handler->query($query)) {
                                         $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 0  WHERE child = " . $item . " father = " . $id . " AND deleted = 0";
                                         var_dump($query);
-                                        if (!$this->handler->query($query)) return false;        
+                                        if (!$this->handler->query($query)) return false;
                                 };
                         } else {
                                 if (isset($item["id"])) {
                                         $this->updateObject($obj_to, $item["id"], $item);
                                         $query = "INSERT INTO " . $this->app["map"][$relation["name"]] . "(father, child) VALUES (" . $id . ", " . $item[$id] . ")";
-                    var_dump($query);  
+                    var_dump($query);
                                         if (!$this->handler->query($query)) {
                                                 $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 0  WHERE child = " . $item["id"] . " father = " . $id . " AND deleted = 0";
                                                 var_dump($query);
@@ -253,7 +255,7 @@ class neodymium {
                                 } else {
                                         $oid = $this->createObject($obj_to, $item);
                                         $query = "INSERT INTO " . $this->app["map"][$relation["name"]] . "(father, child) VALUES (" . $id . ", " . $oid . ")";
-                    var_dump($query);   
+                    var_dump($query);
                                         if (!$this->handler->query($query)) {
                                                 $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 0  WHERE child = " . $oid . " father = " . $id . " AND deleted = 0";
                                                 var_dump($query);
@@ -272,7 +274,7 @@ class neodymium {
         }
 
         public function readRelation($rel_name, $id) {
-                $relation = $this->relations[$rel_name];                
+                $relation = $this->relations[$rel_name];
                 $obj_to = $this->objects[$relation["object_to"]];
 
                 $query = "SELECT child FROM " . $this->app["map"][$relation["name"]];
@@ -302,15 +304,15 @@ class neodymium {
         }
 
     public function parentRelation($rel_name, $child_id) {
-        $relation = $this->relations[$rel_name];            
-                $obj_to = $this->objects[$relation["object_from"]];        
+        $relation = $this->relations[$rel_name];
+                $obj_to = $this->objects[$relation["object_from"]];
         $fields = $this->allFields($obj_to);
-        
+
             $query = "SELECT " . $this->app["map"][$relation["object_from"]] . "`" . join("`, " . $this->app["map"][$relation["object_from"]] . "`", $fields) . "` FROM " . $this->app["map"][$relation["object_from"]];
         $query .= " INNER JOIN " . $this->app["map"][$relation["name"]] . " ON " . $this->app["map"][$relation["name"]] .".id";
         $query .= " = " . $this->app["map"][$relation["object_from"]] . ".id";
                 $query .= " WHERE child = " . $id . " AND deleted = 0";
-        
+
                 $result = $this->handler->query($query);
                 if ($result) {
                         $ret_array = array();
@@ -349,7 +351,7 @@ class neodymium {
         }
 
         //array in proper way of the json fields present
-        private function jsonToFields($obj, $json) {                
+        private function jsonToFields($obj, $json) {
                 $fields = $this->allFields($obj);
                 $return_fields = array();
                 $keys = array_keys($json);
@@ -393,7 +395,7 @@ class neodymium {
                                 "unique" => true,
                                 "autoincremental" => true,
                                 "type" => "number"
-                        )
+                        ),
                         array(
                                 "name" => "ctime",
                                 "type" => "timestamp"
@@ -412,3 +414,5 @@ class neodymium {
                         ),
                 );
 };
+
+?>

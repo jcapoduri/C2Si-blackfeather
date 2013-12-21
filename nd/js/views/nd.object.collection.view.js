@@ -4,13 +4,13 @@ define(['jquery',
         'bootstrap',
         'handlebars',
         'text!templates/nd.object.tpl.html',
-        'models/nd.object'
+        'models/nd.object.collection'
     ],
-    function($, _, Backbone, bootstrap, handlebars, tpl, objectModel){
+    function($, _, Backbone, bootstrap, handlebars, tpl, objectCollectionModel){
 
     var view = Backbone.View.extend({
         initialize: function () {
-            this.model = new objectModel();
+            this.model = new objectCollectionModel();
         },
         template: handlebars.compile(tpl),
         render: function (){

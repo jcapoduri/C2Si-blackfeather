@@ -15,13 +15,19 @@ require '../../server/libs/nd/nd.php';
 $app = new \Slim\Slim();
 
 // Nd settings up
-$config_data = file_get_contents('../../server/config/blackfeather.json');
+$config_file = 'blackfeather.json';
+$config_data = file_get_contents($config_file);
 $config_json = json_decode($config_data, true);
-$system = new \nd\nd($config_json);
+$system = new \nd\neodymium($config_json);
+
 
 //get current config file
-$app->get('/config', function() use ($app, $system) {
+$app->get('/config', function() use ($app, $system, $config_file) {
     //code here
+    $data = file_get_contents($config_file);
+    $response = $app->response();
+    $response['Content-Type'] = 'application/json';
+    $response->write($data);
 });
 
 //save config file

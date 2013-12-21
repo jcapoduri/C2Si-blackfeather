@@ -12,6 +12,7 @@ define(['jquery', 'underscore', 'backbone', 'views/nd.project.view'], function($
         initialize: function () {
             var mainView = new projectView();
             mainView.render();
+            window.project = mainView;
         }
     });
 

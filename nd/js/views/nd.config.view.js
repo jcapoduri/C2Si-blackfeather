@@ -14,7 +14,7 @@ define(['jquery',
         },
         template: handlebars.compile(tpl),
         render: function (){
-            $(this.el).html(this.template(this.model));
+            $(this.el).html(this.template(this.model.toJSON()));
         }
     });
 
