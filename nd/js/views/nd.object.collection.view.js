@@ -14,7 +14,11 @@ define(['jquery',
         },
         template: handlebars.compile(tpl),
         render: function (){
-            $(this.el).html(this.template(this.model));
+            var $el = $(this.el);
+            $el.empty();
+            var view = this;
+            _.each(this.model.models, function(item) { $el.append(view.template(item));});
+
         }
     });
 

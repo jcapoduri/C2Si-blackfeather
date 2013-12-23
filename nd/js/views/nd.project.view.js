@@ -14,7 +14,12 @@ define(['jquery',
         initialize: function () {
             this.project = new projectModel();
             this.configView  = new configView();
+            this.objectView = new objectCollectionView();
             this.project.on('change', this.render, this);
+        },
+        events: {
+            "click #loadButton": "load",
+            "click #saveButton": "save"
         },
         el: $("#main-container"),
         template: handlebars.compile(tpl),
@@ -24,7 +29,13 @@ define(['jquery',
             this.configView.el = $el.find("#config");
             this.configView.model = this.project.get('config');
             this.configView.render();
-        }
+
+            this.objectView.el = $el.find("#object");
+            this.objectView.model = this.project.get('objects');
+            this.objectView.render();
+        },
+        load: function() { this.project.fetch(); },
+        save: function() { this.project.save(); }
     });
 
     return view;
