@@ -39,79 +39,87 @@
                         </div>
                     </form>
                 </div>
-                <div class="panel-body tab-pane active" id="meta"> 
-                    <div class="panel line-panel row">
-                        <label class="col-sm-2">Object Name: </label>
-                        <p class="col-sm-4"> This is the name </p>
-                        <label class="col-sm-3">Fields: </label>
-                        <p class="col-sm-1"> 123 </p>
-                        <div class="col-sm-1"><button type="button" class="btn btn-primary" id="loadButton">Editar</button></div>
-                        <div class="col-sm-1"><button type="button" class="btn btn-danger" id="loadButton">Borrar</button></div>
+                <div class="panel-body tab-pane active" id="meta">
+                    <div class="panel row">
+                        <div class="panel-body">
+                            <label class="col-sm-2">Object Name: </label>
+                            <p class="col-sm-4"> This is the name </p>
+                            <label class="col-sm-3">Fields: </label>
+                            <p class="col-sm-1"> 123 </p>
+                            <div class="col-sm-1"><button type="button" class="btn btn-primary" id="loadButton">Editar</button></div>
+                            <div class="col-sm-1"><button type="button" class="btn btn-danger" id="loadButton">Borrar</button></div>
+                        </div>
                     </div>
-                    <div class="panel line-panel row">
-                        <div class="row">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Object Name: </label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="inputSystemName" placeholder="name" value="">
-                            </div>
-                            <label for="inputEmail3" class="col-sm-2 control-label">ND fields: </label>
-                            <div class="col-sm-1">
-                                <input type="checkbox" class="form-control" id="inputSystemName" placeholder="name" value="">
-                            </div>
-                            <br class="clearfix">
-                        </div>
-                        <br class="clearfix">       
-                        <h3>Fields</h3>
-                        <div class="col-sm-12 line-panel row">                            
-                            <div class="row"> 
-                                <label class="col-sm-2">Field Name: </label>
-                                <p class="col-sm-3"> This is the name </p>
-                                <label class="col-sm-1">Type: </label>
-                                <p class="col-sm-2"> 123 </p>
-                                <div class="col-sm-4 nav">
-                                    <button type="button" class="btn btn-primary" id="loadButton">Editar</button>
-                                    <button type="button" class="btn btn-primary" id="loadButton">Up</button>
-                                    <button type="button" class="btn btn-primary" id="loadButton">Down</button>
-                                    <button type="button" class="btn btn-danger" id="loadButton">Borrar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 line-panel row">                            
-                            <div class="row"> 
-                                <label class="col-sm-1">Field Name: </label>
-                                <div class="col-sm-3">
+                    <div class="panel panel-default row">
+                        <div class="panel-heading">
+                            <div class="panel-body">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Object Name: </label>
+                                <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inputSystemName" placeholder="name" value="">
                                 </div>
-                                <label class="col-sm-1">Type: </label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="inputSystemName" placeholder="name" value="">
-                                        <option value="string">string</option>
-                                        <option value="string">numeral</option>
-                                        <option value="string">decimal</option>
-                                        <option value="string">array</option>
-                                        <option value="string">object</option>
-                                    </select>
+                                <label for="inputEmail3" class="col-sm-1 control-label">ND fields: </label>
+                                <div class="col-sm-1">
+                                    <input type="checkbox" class="form-control" id="inputSystemName" placeholder="name" value="">
                                 </div>
-                                <label class="col-sm-1">Object/rel: </label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="inputSystemName" placeholder="name" value="">
-                                        <option value="string">sdf</option>
-                                        <option value="string">nusadfal</option>
-                                        <option value="string">decasdf</option>
-                                        <option value="string">arxzcv<option>
-                                        <option value="string">object</option>
-                                    </select>
+                                <div class="col-sm-2 pull-right">
+                                    <button type="button" class="btn btn-success" id="saveButton">Save</button>
+                                    <button type="button" class="btn btn-primary" id="loadButton">Cancel</button>
                                 </div>
                             </div>
-                            <div class="nav">
-                                <button type="button" class="btn btn-success" id="saveButton">Save</button>
-                                <button type="button" class="btn btn-primary" id="loadButton">Cancel</button>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-heading">
+                                <h3>Fields</h3>
                             </div>
-                        </div>   
-                        <div class="nav row">
-                            <button type="button" class="btn btn-success" id="saveButton">Save</button>
-                            <button type="button" class="btn btn-primary" id="loadButton">Cancel</button>
-                        </div>                     
+                            <div class="panel-body">
+                                <div class="col-sm-12 line-panel row">
+                                    <div class="row">
+                                        <label class="col-sm-2">Field Name: </label>
+                                        <p class="col-sm-4"> This is the name </p>
+                                        <label class="col-sm-1">Type: </label>
+                                        <p class="col-sm-2"> 123 </p>
+                                        <div class="col-sm-3 nav">
+                                            <button type="button" class="btn btn-primary" id="loadButton">Editar</button>
+                                            <button type="button" class="btn btn-primary glyphicon glyphicon-chevron-up" id="loadButton">&nbsp;</button>
+                                            <button type="button" class="btn btn-primary glyphicon glyphicon-chevron-down" id="loadButton">&nbsp;</button>
+                                            <button type="button" class="btn btn-danger" id="loadButton">Borrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 line-panel row">
+                                    <div class="row">
+                                        <label class="col-sm-1">Field Name: </label>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" id="inputSystemName" placeholder="name" value="">
+                                        </div>
+                                        <label class="col-sm-1">Type: </label>
+                                        <div class="col-sm-3">
+                                            <select class="form-control" id="inputSystemName" placeholder="name" value="">
+                                                <option value="string">string</option>
+                                                <option value="string">numeral</option>
+                                                <option value="string">decimal</option>
+                                                <option value="string">array</option>
+                                                <option value="string">object</option>
+                                            </select>
+                                        </div>
+                                        <label class="col-sm-1">Object/rel: </label>
+                                        <div class="col-sm-3">
+                                            <select class="form-control" id="inputSystemName" placeholder="name" value="">
+                                                <option value="string">sdf</option>
+                                                <option value="string">nusadfal</option>
+                                                <option value="string">decasdf</option>
+                                                <option value="string">arxzcv<option>
+                                                <option value="string">object</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="nav pull-right">
+                                        <button type="button" class="btn btn-success" id="saveButton">Save</button>
+                                        <button type="button" class="btn btn-primary" id="loadButton">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="panel-body tab-pane" id="object"></div>
