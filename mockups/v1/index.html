@@ -4,25 +4,74 @@
         <link rel="stylesheet" href="../../styles/normalize.css" type="text/css">
         <link rel="stylesheet" type="text/css" href="../../styles/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="../../styles/bootstrap-theme.css">
-        <link rel="stylesheet" type="text/css" href="../../nd/styles/nd.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/yeti.bootstrap-theme.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/styles.css">
+        <script type="text/javascript" src="../../js/vendors/jquery/jquery.js"></script>
+        <script type="text/javascript" src="../../js/vendors/bootstrap/bootstrap.js"></script>
         <!--script type="text/javascript" src="../js/vendors/requirejs/require.js" data-main="js/main"></script-->
     </head>
     <body>
-        <header class="navbar navbar-default" id="header-widget">
-            <div class="nav">
-                <h3>Black Feather</h3>
-            </div>
-        </header>
-        <div class="row" id="main-container">
-            <div class="col-md-2" id="side-widget">
-                <ul>
-                  <li>Cras justo odio</li>
-                  <li>Dapibus ac facilisis in</li>
-                  <li>Morbi leo risus</li>
-                  <li>Porta ac consectetur ac</li>
-                  <li>Vestibulum at eros</li>
+        <nav class="nav navbar-inverse" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Bf</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{empresa}} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">{{empresa_2}}</a></li>
+                  <li><a href="#">{{empresa_3}}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Configurar Actual</a></li>
                 </ul>
-            </div>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{local}} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">{{local_2}}</a></li>
+                  <li><a href="#">{{local_3}}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Configurar Actual</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Ayuda</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user}} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Perfil</a></li>
+                  <li><a href="#">Mensajes</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Log out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </nav>
+        <div class="row" id="main-container">
+            <aside class="col-md-2" id="side-widget">
+                <ul class="navlist">
+                  <li>Facturas <span class="glyphicon glyphicon-chevron-right pull-right"></span></li>
+                  <li>Stock <span class="glyphicon glyphicon-chevron-right pull-right"></span></li>
+                  <li>Reportes <span class="glyphicon glyphicon-chevron-right pull-right"></span></li>
+                  <li>Clientes <span class="glyphicon glyphicon-chevron-right pull-right"></span></li>
+                  <li>Tarjetas <span class="glyphicon glyphicon-chevron-right pull-right"></span></li>
+                </ul>
+            </aside>
             <div class="col-md-10" id="central-widget"> app </div>
         </div>
     </body>
