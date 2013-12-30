@@ -10,12 +10,13 @@ require '../libs/Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
 
 $app = new \Slim\Slim();
-error_reporting(E_ALL)
-;
-$app->get('/user', function(){
+error_reporting(E_ALL);
+
+$app->post('/OAuth2/src/League/OAuth2/Server/Authorization.php', function(){
 	
 });
 
 $app->run();
+
 
 ?>
