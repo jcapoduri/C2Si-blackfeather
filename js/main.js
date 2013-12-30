@@ -10,7 +10,7 @@ require(
         'app/application.module'
       ],
       function(Application) {
-        Application.start();
+        Application.init();
       });
   }
 );
