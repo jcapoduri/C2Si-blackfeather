@@ -44,11 +44,6 @@ aside#side-widget:hover{
     overflow: hidden;
 }
 
-aside#side-widget:hover + div#central-widget {
-    width: 83.33333333333334%;
-    padding-right: 28px;
-}
-
 ul.navlist {
     list-style: none;
     width: 100%;
@@ -61,12 +56,4 @@ ul.navlist > li {
     padding: 5px 10px 5px 10px;
     border-bottom: 1px #666;
     color: #666;
-}
-
-#central-widget {
-    padding-top: 10px;
-    width: 95%;
-    padding-right: 10px;
-    transition: width 1s, padding-right 1s;
-    -webkit-transition: width 1s, padding-right 1s; /* Safari */
 }
