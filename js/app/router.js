@@ -14,7 +14,7 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
         }
     });
 
-    var init = function () {
+    /*var init = function () {
         var app_router = new router;
         app_router.on('showProjects', function(){
           // Call render on the module we loaded in via the dependency array
@@ -31,9 +31,7 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
           console.log('No route:', actions);
         });
         Backbone.history.start();
-    };
+    };*/
 
-    return {
-        init: init
-    };
+    return router;
 });
