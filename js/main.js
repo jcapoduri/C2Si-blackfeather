@@ -1,6 +1,6 @@
 require(
   [
-    './js/config.js'
+    'config.js'
   ],
   function() {
     'use strict';

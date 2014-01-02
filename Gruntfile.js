@@ -24,9 +24,9 @@ module.exports = function(grunt) {
                 options: {
                     baseUrl: "js",
                     mainConfigFile: "js/config.js",
-                    out: "bin/js/backfeather.js",
-                    name: "app/application",
-                    optimize: 'uglify',
+                    out: "bin/js/blackfeather.js",
+                    include: ['app/application', 'main.js'],
+                    //optimize: 'uglify',
                     normalizeDirDefines: 'all'
                 }
             }
@@ -43,7 +43,10 @@ module.exports = function(grunt) {
             files: [
               {expand: true, src: ['assets/**'], dest: 'bin/'},
               {expand: true, src: ['fonts/**'], dest: 'bin/'},
-              {expand: true, cwd: 'server/', src: ['**'], dest: 'bin/'}
+              {expand: true, cwd: 'server/', src: ['**'], dest: 'bin/'},
+              {expand: true, src: ['index.php'], dest: 'bin/'},
+              {expand: true, src: ['.htaccess'], dest: 'bin/'},
+              {expand: true, cwd: 'js/vendors/requirejs', src: ['require.js'], dest: 'bin/js'},
             ]
           }
         },
