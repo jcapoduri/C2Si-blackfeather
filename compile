@@ -1,8 +1,0 @@
-#!/bin/bash
-rm -R bin/
-<<<<<<< HEAD
-lumbar build lumbar.json bin
-=======
-#lumbar build lumbar.json bin
-grunt
->>>>>>> 3e5525f79d4493d34d7dbc6e040ef2a531818ce7
