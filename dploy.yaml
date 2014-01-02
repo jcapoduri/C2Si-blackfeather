@@ -7,8 +7,8 @@ dev:
     check: true
     revision: "test"
     path:
+        local: 'bin/'
         remote: "public_html/dblackfeather/"
-    exclude: ["*.yaml", "*.js", "mockups/**/*", "nd/**/*", "*.md", ".git", "nd/**/.htaccess", ".gitignore"]
 
 stage:
     scheme: ftp
@@ -18,18 +18,5 @@ stage:
     pass: abcd1234
     check: true
     path:
-        local: "."
+        local: 'bin/'
         remote: "public_html/qblackfeather"
-    exclude: ["./*.yaml", "./*.js", "./mockups", "./nd", "./node_modules", "*.md", ".git"]
-
-prod:
-    scheme: ftp
-    host: blackfeather.c2si.com.ar
-    port: 21
-    user: shaka
-    pass: abcd1234
-    check: true
-    path:
-        local: ./
-        remote: ./
-    exclude: ["./*.yaml", "./*.js", "./mockups", "./nd", "./node_modules", "*.md", ".git"]
