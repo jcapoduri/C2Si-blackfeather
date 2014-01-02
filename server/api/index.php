@@ -19,7 +19,13 @@ $config_data = file_get_contents('../config/blackfeather.json');
 $config_json = json_decode($config_data, true);
 $system = new \nd\nd($config_json);
 
+// Noop - no operation (for testing)
 
+$app->get('/noop', function () use ($app){
+    $response = $app->response();
+    $response['Content-Type'] = 'application/json';
+    $response->write('{}');
+});
 
 // SLIM start point
 $app->run();
