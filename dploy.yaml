@@ -1,32 +1,35 @@
 dev:
     scheme: ftp
-    host: ftp.my-dev-server.com
+    host: dblackfeather.c2si.com.ar
     port: 21
-    user: user
-    pass: password
+    user: "shaka"
+    pass: "abcd1234"
     check: true
+    revision: "test"
     path:
-        local: release/
-        remote: public_html/
+        remote: "public_html/dblackfeather/"
+    exclude: ["*.yaml", "*.js", "mockups/**/*", "nd/**/*", "node*/**/.?*/**/*", "node_modules/**/.?*", "*.md", ".git", "nd/**/.htaccess", ".gitignore"]
 
 stage:
     scheme: ftp
-    host: ftp.my-stage-server.com
+    host: qblackfeather.c2si.com.ar
     port: 21
-    user: user
-    pass: password
+    user: shaka
+    pass: abcd1234
     check: true
     path:
-        local: release/
-        remote: public_html/
+        local: "."
+        remote: "public_html/qblackfeather"
+    exclude: ["./*.yaml", "./*.js", "./mockups", "./nd", "./node_modules", "*.md", ".git"]
 
-live:
+prod:
     scheme: ftp
-    host: ftp.my-live-server.com
+    host: blackfeather.c2si.com.ar
     port: 21
-    user: user
-    pass: password
+    user: shaka
+    pass: abcd1234
     check: true
     path:
-        local: release/
-        remote: public_html/
+        local: ./
+        remote: ./
+    exclude: ["./*.yaml", "./*.js", "./mockups", "./nd", "./node_modules", "*.md", ".git"]

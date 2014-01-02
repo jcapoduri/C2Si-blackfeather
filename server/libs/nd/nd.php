@@ -55,6 +55,7 @@ class neodymium {
                 return ($this->handler == true);
         }
 
+// ORM basic functions
         public function makeObject($obj, $row) {
                 $fields_data = $this->getFieldsData($obj);
                 $keys = array_keys($fields_data);
@@ -297,13 +298,14 @@ class neodymium {
         }
 
         public function deleteObject($obj_name, $id) {
-                if (isset($id)) return false;
-                $query = "UPDATE " . $this->apps["map"][$obj_name] . " SET delete = 1 ";
+                if (!isset($id)) return false;
+                $query = "UPDATE " . $this->app["map"][$obj_name] . " SET deleted = 1 ";
                 $query .= " WHERE id = " . $id;
                 return $this->handler->query($query);
         }
 
-    public function parentRelation($rel_name, $child_id) {
+// helper functions
+        public function parentRelation($rel_name, $child_id) {
         $relation = $this->relations[$rel_name];
                 $obj_to = $this->objects[$relation["object_from"]];
         $fields = $this->allFields($obj_to);
@@ -371,8 +373,52 @@ class neodymium {
                 for ($i = 0; $i < $len; $i++) {
                         $return_fields[$fields[$i]["name"]] = $fields[$i];
                 };
-                if ($obj["nd_fields"]) $return_fields = array_merge(ndlite::$nd_fields, $return_fields);
+                if ($obj["nd_fields"]) $return_fields = array_merge(neodymium::$nd_fields, $return_fields);
                 return $return_fields;
+        }
+
+
+// database functions
+        //
+        public function buildPersistency() {
+            $this->handler->autocommit(false);
+            // podria usar keys
+            foreach ($this->objects as $obj_name => $obj) {
+                buildObjectPersistency($obj_name);
+            };
+        }
+
+        private function buildObjectPersistency($obj_name) {
+            $obj = $this->objects[$obj_name];
+            $fields_data = $this->getFieldsData($obj);
+            $keys = array_keys($fields_data);
+            $len = count($keys);
+            $item = null;
+
+            $tablename =  $this->app["map"][$obj_name];
+
+            //create table
+            $this->handler->query('CREATE TABLE IF NOT EXISTS ' . $tablename);
+
+            for ($i = 0; $i < $len; $i++) {
+                    $item = $fields_data[$keys[$i]];
+                    $this->handler->query('ALTER TABLE ' . $tablename . '');
+                    switch ($item["type"]) {
+                            case 'array':
+                                    $return_obj[$item["name"]] = $this->readRelation($item["relation_name"], $row["id"]);
+                                    break;
+                            case 'object':
+                                    $return_obj[$item["name"]] = $this->readObject($item["object_name"], $row[$item["name"]]);
+                                    break;
+                            default:
+                                    $return_obj[$item["name"]] = $row[$item["name"]];
+                                    break;
+                    }
+            };
+        }
+
+        private function buildRelationPersistency($relName) {
+
         }
 
         public function beginTransaction() {}
