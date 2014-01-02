@@ -8,7 +8,7 @@ dev:
     revision: "test"
     path:
         remote: "public_html/dblackfeather/"
-    exclude: ["*.yaml", "*.js", "mockups/**/*", "nd/**/*", "node*/**/.?*/**/*", "node_modules/**/.?*", "*.md", ".git", "nd/**/.htaccess", ".gitignore"]
+    exclude: ["*.yaml", "*.js", "mockups/**/*", "nd/**/*", "*.md", ".git", "nd/**/.htaccess", ".gitignore"]
 
 stage:
     scheme: ftp
