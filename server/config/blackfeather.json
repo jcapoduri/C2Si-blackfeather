@@ -57,7 +57,7 @@
         }
     ],
     "relations": [],
-    "storage": [
+    "storages": [
         {
             "name": "sql_dev",
             "type": "database",
@@ -67,13 +67,25 @@
             "db_pass": "Pretoria.46",
             "db_port": 3061,
             "db_type": "mysql"
+        },
+        {
+            "name": "sql_local",
+            "type": "database",
+            "db_host": "127.11.188.129",
+            "db_name": "c9",
+            "db_user": "jcapoduri",
+            "db_pass": "",
+            "db_port": 3061,
+            "db_type": "mysql"
         }
     ],
     "apps": {
         "web": {
-            "storage": ["sql_dev"],
+            "storage": ["sql_local"],
             "map": {
-                "user" : "users"
+                "user" : "users",
+                "user_extends" : "user_extends",
+                "personal_information": "personal_informations"
             }
         }
     }

@@ -13,19 +13,18 @@ require '../libs/nd/nd.php';
 // SLIM setting up
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
-<<<<<<< HEAD
+
 error_reporting(E_ALL);
 
 $app->post('/OAuth2/src/League/OAuth2/Server/Authorization.php', function(){
-	
+
 });
-=======
->>>>>>> 8f7ecc3c83c01deb99071cb7c82a7ae9e661aab9
+
 
 // Nd settings up
 $config_data = file_get_contents('../config/blackfeather.json');
 $config_json = json_decode($config_data, true);
-$system = new \nd\nd($config_json);
+$system = new \nd\neodynium($config_json);
 
 // Noop - no operation (for testing)
 

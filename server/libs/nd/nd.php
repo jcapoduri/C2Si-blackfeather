@@ -13,7 +13,7 @@ class response {
         }
 };
 
-class neodymium {
+class neodynium {
         public function __construct($json_data){
                 $this->raw = $json_data;
                 $this->objects = array();
@@ -373,7 +373,7 @@ class neodymium {
                 for ($i = 0; $i < $len; $i++) {
                         $return_fields[$fields[$i]["name"]] = $fields[$i];
                 };
-                if ($obj["nd_fields"]) $return_fields = array_merge(neodymium::$nd_fields, $return_fields);
+                if ($obj["nd_fields"]) $return_fields = array_merge(neodynium::$nd_fields, $return_fields);
                 return $return_fields;
         }
 
@@ -384,8 +384,10 @@ class neodymium {
             $this->handler->autocommit(false);
             // podria usar keys
             foreach ($this->objects as $obj_name => $obj) {
-                buildObjectPersistency($obj_name);
+                $this->buildObjectPersistency($obj_name);
             };
+            $this->handler->commit();
+            var_dump($this->handler->error);
         }
 
         private function buildObjectPersistency($obj_name) {
@@ -398,20 +400,28 @@ class neodymium {
             $tablename =  $this->app["map"][$obj_name];
 
             //create table
-            $this->handler->query('CREATE TABLE IF NOT EXISTS ' . $tablename);
+            $this->handler->query('CREATE TABLE IF NOT EXISTS ' . $tablename . '(`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `ctime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  `mtime` timestamp NOT NULL on update CURRENT_TIMESTAMP,
+                  `dtime` timestamp NOT NULL,
+                  `deleted` TINYINT(1) NOT NULL DEFAULT 0,
+                  PRIMARY KEY (`id`))'
+            );
+            var_dump('CREATE TABLE IF NOT EXISTS ' . $tablename . ' error:' .$this->handler->error);
 
             for ($i = 0; $i < $len; $i++) {
                     $item = $fields_data[$keys[$i]];
-                    $this->handler->query('ALTER TABLE ' . $tablename . '');
+                    //$this->handler->query('ALTER TABLE ' . $tablename . '');
+                    //var_dump($this->handler->error);
                     switch ($item["type"]) {
                             case 'array':
-                                    $return_obj[$item["name"]] = $this->readRelation($item["relation_name"], $row["id"]);
+                                    //$return_obj[$item["name"]] = $this->readRelation($item["relation_name"], $row["id"]);
                                     break;
                             case 'object':
-                                    $return_obj[$item["name"]] = $this->readObject($item["object_name"], $row[$item["name"]]);
+                                    //$return_obj[$item["name"]] = $this->readObject($item["object_name"], $row[$item["name"]]);
                                     break;
                             default:
-                                    $return_obj[$item["name"]] = $row[$item["name"]];
+                                    //$return_obj[$item["name"]] = $row[$item["name"]];
                                     break;
                     }
             };
