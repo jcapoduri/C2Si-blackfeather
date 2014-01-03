@@ -1,0 +1,22 @@
+dev:
+    scheme: ftp
+    host: dblackfeather.c2si.com.ar
+    port: 21
+    user: "shaka"
+    pass: "abcd1234"
+    check: true
+    revision: "test"
+    path:
+        local: 'bin/'
+        remote: "public_html/dblackfeather/"
+
+stage:
+    scheme: ftp
+    host: qblackfeather.c2si.com.ar
+    port: 21
+    user: shaka
+    pass: abcd1234
+    check: true
+    path:
+        local: 'bin/'
+        remote: "public_html/qblackfeather"

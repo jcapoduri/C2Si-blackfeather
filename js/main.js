@@ -1,16 +1,18 @@
 require(
   [
-    './js/config.js'
+    'config.js'
   ],
   function() {
     'use strict';
     //Start ApplicationModule
     require(
       [
-        'app/application.module'
+        'backbone',
+        'app/application'
       ],
-      function(Application) {
-        Application.init();
+      function(Backbone, Application) {
+          var app = new Application;
+          window.Raven = _.extend(app, Backbone.Events);
       });
   }
 );
