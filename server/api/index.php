@@ -16,11 +16,6 @@ $app = new \Slim\Slim();
 
 error_reporting(E_ALL);
 
-$app->post('/OAuth2/src/League/OAuth2/Server/Authorization.php', function(){
-
-});
-
-
 // Nd settings up
 $config_data = file_get_contents('../config/blackfeather.json');
 $config_json = json_decode($config_data, true);
