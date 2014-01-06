@@ -20,6 +20,7 @@ error_reporting(E_ALL);
 $config_data = file_get_contents('../config/blackfeather.json');
 $config_json = json_decode($config_data, true);
 $system = new \nd\neodynium($config_json);
+$system->startApp("web");
 
 // Noop - no operation (for testing)
 
@@ -27,6 +28,15 @@ $app->get('/noop', function () use ($app){
     $response = $app->response();
     $response['Content-Type'] = 'application/json';
     $response->write('{}');
+});
+
+
+/**
+*   Login interface
+*/
+
+$app->post('/login', function() use ($app, $system) {
+
 });
 
 // SLIM start point

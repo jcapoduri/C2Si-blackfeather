@@ -217,7 +217,7 @@ class neodynium {
 
                 $query .= join(", ", $fields_update);
                 $query .= " WHERE id = " . $id. ' AND deleted = 0';
-        var_dump($query);
+
                 return $this->handler->query($query);
         }
 
@@ -230,46 +230,46 @@ class neodynium {
                 $len = count($json);
 
                 $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 1  WHERE father = " . $id . " AND deleted = 0";
-                var_dump($query);
+
                 if (!$this->handler->query($query)) return false;
 
                 for ($i = 0; $i < $len; $i++) {
                         $item = $json[$i];
                         if (is_numeric($item)) {
                                 $query = "INSERT INTO " . $this->app["map"][$relation["name"]] . "(father, child) VALUES (" . $id . ", " . $item . ")";
-                var_dump($query);
+
                                 if (!$this->handler->query($query)) {
                                         $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 0  WHERE child = " . $item . " father = " . $id . " AND deleted = 0";
-                                        var_dump($query);
+
                                         if (!$this->handler->query($query)) return false;
                                 };
                         } else {
                                 if (isset($item["id"])) {
                                         $this->updateObject($obj_to, $item["id"], $item);
                                         $query = "INSERT INTO " . $this->app["map"][$relation["name"]] . "(father, child) VALUES (" . $id . ", " . $item[$id] . ")";
-                    var_dump($query);
+
                                         if (!$this->handler->query($query)) {
                                                 $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 0  WHERE child = " . $item["id"] . " father = " . $id . " AND deleted = 0";
-                                                var_dump($query);
+
                                                 if (!$this->handler->query($query)) return false;
                                         };
                                 } else {
                                         $oid = $this->createObject($obj_to, $item);
                                         $query = "INSERT INTO " . $this->app["map"][$relation["name"]] . "(father, child) VALUES (" . $id . ", " . $oid . ")";
-                    var_dump($query);
+
                                         if (!$this->handler->query($query)) {
                                                 $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 0  WHERE child = " . $oid . " father = " . $id . " AND deleted = 0";
-                                                var_dump($query);
+
                                                 if (!$this->handler->query($query)) return false;
                                         };
                                 };
                         };
                 };
                 $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET deleted = 1  WHERE father = " . $id . " AND checked = 1";
-                var_dump($query);
+
                 if (!$this->handler->query($query)) return false;
                 $query = "UPDATE " . $this->app["map"][$relation["name"]] . " SET checked = 0  WHERE father = " . $id ;
-                var_dump($query);
+
                 if (!$this->handler->query($query)) return false;
                 return true;
         }
@@ -328,6 +328,10 @@ class neodynium {
             return $return_obj;
         }
 // helper functions
+        public function entityMap($entity_name) {
+            return $this->app["map"][$entity_name];
+        }
+
         public function parentRelation($rel_name, $child_id) {
         $relation = $this->relations[$rel_name];
                 $obj_to = $this->objects[$relation["object_from"]];
@@ -400,8 +404,14 @@ class neodynium {
                 return $return_fields;
         }
 
-        public function query() {
-            return new query($this);
+        public function getObjectFieldList($obj_name) {
+            $obj = $this->objects[$obj_name];
+            return $this->allFields($obj);
+        }
+
+        public function query($entity) {
+            $query = new query($this);
+            return $query->entity($entity);
         }
 // database functions TO DO
         //
@@ -535,8 +545,8 @@ class query {
     * execute current query
     **/
     public function exec() {
-        // optimizar trayendote los campos solamente
-        $query = "SELECT * FROM " . $this->entity;
+        $fields = $this->nd->getObjectFieldList($this->entity);
+        $query = "SELECT `" . join($fields, '`, `') . "` FROM " . $this->nd->entityMap($this->entity);
         if (!is_null($this->predicative)) $query .= $this->predicative->generateSQL();
         return $this->nd->handler->query($query);
     }

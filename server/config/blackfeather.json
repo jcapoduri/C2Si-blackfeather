@@ -63,8 +63,8 @@
             "type": "database",
             "db_host": "c2si.com.ar",
             "db_name": "shaka_dev_blackfeather",
-            "db_user": "shaka_blackfeather",
-            "db_pass": "Pretoria.46",
+            "db_user": "shaka",
+            "db_pass": "abcd1234",
             "db_port": 3061,
             "db_type": "mysql"
         },
@@ -81,7 +81,7 @@
     ],
     "apps": {
         "web": {
-            "storage": ["sql_local"],
+            "storage": ["sql_dev"],
             "map": {
                 "user" : "users",
                 "user_extends" : "user_extends",
