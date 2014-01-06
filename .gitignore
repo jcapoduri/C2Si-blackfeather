@@ -41,3 +41,4 @@ Thumbs.db
 #nd/*
 node_modules
 bin
+vendor
