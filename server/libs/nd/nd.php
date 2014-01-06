@@ -298,12 +298,35 @@ class neodynium {
         }
 
         public function deleteObject($obj_name, $id) {
-                if (!isset($id)) return false;
-                $query = "UPDATE " . $this->app["map"][$obj_name] . " SET deleted = 1 ";
-                $query .= " WHERE id = " . $id;
-                return $this->handler->query($query);
+            if (!isset($id)) return false;
+            $query = "UPDATE " . $this->app["map"][$obj_name] . " SET deleted = 1 ";
+            $query .= " WHERE id = " . $id;
+            return $this->handler->query($query);
         }
 
+        public function restoreObject($obj_name, $id) {
+            if (!isset($id)) return false;
+            $query = "UPDATE " . $this->app["map"][$obj_name] . " SET deleted = 0 ";
+            $query .= " WHERE id = " . $id;
+            return $this->handler->query($query);
+        }
+
+        public function riseObject($obj_name, $id) {
+            $obj = $this->objects[$obj_name];
+            $fields_data = $this->getFieldsData($obj);
+            $fields = $this->allFields($obj);
+            $query = "SELECT `" . join("`, `", $fields) . "` FROM " . $this->app["map"][$obj_name];
+            $query .= " WHERE id = " . $id;
+            $result = $this->handler->query($query);
+            if (!$result) return false;
+
+            //make object from fields
+            $data = $result->fetch_assoc();
+            if (is_null($data)) return false;
+            $return_obj = $this->makeObject($obj, $data);
+
+            return $return_obj;
+        }
 // helper functions
         public function parentRelation($rel_name, $child_id) {
         $relation = $this->relations[$rel_name];
@@ -377,8 +400,10 @@ class neodynium {
                 return $return_fields;
         }
 
-
-// database functions
+        public function query() {
+            return new query($this);
+        }
+// database functions TO DO
         //
         public function buildPersistency() {
             $this->handler->autocommit(false);
@@ -435,7 +460,6 @@ class neodynium {
 
         public function endTransaction() {}
 
-
         private $objects;
         private $relations;
         private $storages;
@@ -471,4 +495,126 @@ class neodynium {
                 );
 };
 
+class query {
+    protected $nd;
+    protected $entity;
+    protected $isRelation = false;
+    protected $predicative = null;
+
+    public function __construct(neodynium $nd) {
+        $this->nd = $nd;
+        return $this;
+    }
+
+    /*
+    * select and entity to work
+    */
+    public function entity($entity_name) {
+        $this->entity = $entity_name;
+        return $this;
+    }
+
+    /*
+    *
+    */
+    public function relation($relation_name) {
+        $this->isRelation = true;
+        $this->entity = $relation_name;
+        return $this;
+    }
+
+    /*
+    * @return predicative
+    */
+    public function filter($column, $filtertype, $value) {
+        $this->predicative = new predicative($column, $filtertype, $this->nd->handler->real_escape_string($value));
+        return $this->predicative;
+    }
+
+    /*
+    * execute current query
+    **/
+    public function exec() {
+        // optimizar trayendote los campos solamente
+        $query = "SELECT * FROM " . $this->entity;
+        if (!is_null($this->predicative)) $query .= $this->predicative->generateSQL();
+        return $this->nd->handler->query($query);
+    }
+};
+
+class predicative {
+    protected $column = "";
+    protected $filterType = "";
+    protected $filterValue = "";
+    protected $negate = null;
+    protected $and_others = array();
+    protected $or_others = array();
+
+    public function __construct($column, $filterType, $filterValue) {
+        $this->column = $column;
+        $this->filterType = $filterType;
+        $this->filterValue = $filterValue;
+    }
+
+    public function generateSQL() {
+        $query = $this->filterToSql();
+        $and_array = array();
+        $and_query = "";
+        $or_array = array();
+        $or_query = "";
+
+        foreach ($this->and_others as $pred) {
+            array_push($and_array, $pred->generateSQL());
+        };
+        $and_query = join($and_array, " AND ");
+
+        foreach ($this->or_others as $pred) {
+            array_push($or_array, $pred->generateSQL());
+        };
+        $or_query = join($or_array, " OR ");
+
+        $query = "(" . $query . ")";
+        if ($and_query) $query .= " AND (" . $and_query . ")";
+        if ($or_query) $query .= " AND (" . $or_query . ")";
+        if (!is_null($this->negate)) $query .= " AND NOT (" . $this->negate->generateSQL() . ")";
+    }
+
+    protected function filterToSql() {
+        $query = $this->column;
+        switch ($this->filterType) {
+            case "startWith":
+                $query .= " LIKE '" . $this->filterValue . "%'";
+                return $query; //<-------- special case, REFACTOR!
+                break;
+            case "endsWith":
+                $query .= " LIKE '%" . $this->filterValue;
+                break;
+            case "like":
+            case "equal":
+            case "=":
+                $query .= is_numeric($this->filterValue) ? " = " : " LIKE '";
+                break;
+            default:
+                $query .= $this->filterType;
+                break;
+        };
+        if (is_numeric($this->filterValue)) $query .= "'";
+    }
+
+    public function logical_and(predicative $other) {
+        array_push($this->and_others, $other);
+    }
+
+    public function logical_or(predicative $other) {
+        array_push($this->and_others, $other);
+    }
+
+    public function logical_not(predicative $other) {
+        $this->negate = $other;
+    }
+};
+
+class error extends \Exception {
+
+}
 ?>
