@@ -34,7 +34,6 @@ $app->get('/noop', function () use ($app){
 /**
 *   Login interface
 */
-
 $app->post('/login', function() use ($app, $system) {
 
 });

@@ -13,6 +13,10 @@ body {
   background: -moz-radial-gradient(10% 0, farthest-side ellipse, rgba(102,105,104,0.9), rgba(93,112,119,0.89), rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");
 }
 
+body > div {
+    margin-top: 15px;
+}
+
 .editable {
 }
 
@@ -56,4 +60,10 @@ ul.navlist > li {
     padding: 5px 10px 5px 10px;
     border-bottom: 1px #666;
     color: #666;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
 }
