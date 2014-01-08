@@ -17,6 +17,10 @@ define(function() {
             },
             'handlebars': {
                 exports: 'Handlebars'
+            },
+            'jquery_cookie': {
+                deps: ['jquery'],
+                exports: 'jquery_cookie'
             }
     	},
     	paths: {
@@ -24,6 +28,7 @@ define(function() {
     	    backbone: 'vendors/backbone/backbone',
     		underscore: 'vendors/underscore/underscore',
     		jquery: 'vendors/jquery/jquery.min',
+    		jquery_cookie: 'vendors/jquery/jquery-cookie',
     		handlebars: 'vendors/handlebars/handlebars',
     		bootstrap: 'vendors/bootstrap/bootstrap.min'
     	}

@@ -83,8 +83,6 @@ class query {
         $fields = $this->nd->getObjectFieldList($this->entity);
         $query = "SELECT `" . join($fields, '`, `') . "` FROM " . $this->nd->entityMap($this->entity);
         if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL();
-        var_dump($this->predicative->generateSQL());
-        var_dump($query);
         return $this->nd->handler->query($query);
     }
 };

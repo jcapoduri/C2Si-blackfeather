@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             files: [
               {expand: true, src: ['assets/**'], dest: 'bin/'},
               {expand: true, src: ['fonts/**'], dest: 'bin/'},
-              {expand: true, cwd: 'server/', src: ['**'], dest: 'bin/'},
+              {expand: true, dot: true, cwd: 'server/', src: ['**'], dest: 'bin/'},
               {expand: true, src: ['index.php'], dest: 'bin/'},
               {expand: true, src: ['.htaccess'], dest: 'bin/'},
               {expand: true, cwd: 'js/vendors/requirejs', src: ['require.js'], dest: 'bin/js'},

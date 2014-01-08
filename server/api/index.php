@@ -9,6 +9,8 @@ ini_set('display_errors', 1);
 require '../libs/Slim/Slim.php';
 // small propietary ORM
 require '../libs/nd/nd.php';
+// small propietary Auth
+require '../libs/Auth/Auth.php';
 
 // SLIM setting up
 \Slim\Slim::registerAutoloader();
@@ -30,13 +32,7 @@ $app->get('/noop', function () use ($app){
     $response->write('{}');
 });
 
-
-/**
-*   Login interface
-*/
-$app->post('/login', function() use ($app, $system) {
-
-});
+require_once 'security/access.php';
 
 // SLIM start point
 $app->run();

@@ -1,14 +1,22 @@
-define(['jquery', 'underscore', 'backbone', 'app/router'], function($, _, Backbone, Router){
+define(['jquery', 'underscore', 'backbone', 'jquery_cookie', 'app/router'], function($, _, Backbone, cookie, Router){
     var application = function () {
-        var router = new Router();
+        var router = new Router(),
+            access_token = '';
 
         var
         initialize = function (){
             Backbone.history.start();
+            //if ($.cookie(''))
+            //chequeo si hay un usuario
+            if (window.location.path != "/") {
+                access_token = $.cookie('jcapoduri');
+            } else { //request login
+
+            }
         },
         publicRegion = {
             init: function () {
-                this.initialize();
+                initialize();
                 return publicRegion;
             },
             get router() {

@@ -58,7 +58,7 @@ class Auth {
       $insertedToekn = false;
       do {
         $token = bin2hex(openssl_random_pseudo_bytes(16));
-        $insertedToken = $this->handler->query("INSERT INTO auth_token (token, expiration, id_usr) VALUES ('".$newToken."', NOW() + INTERVAL 1 HOUR, " . $userid . ")");
+        $insertedToken = $this->handler->query("INSERT INTO auth_token (token, expiration, id_usr) VALUES ('".$token."', NOW() + INTERVAL 1 HOUR, " . $userid . ")");
       } while (!$insertedToken);
 
       return $token;
