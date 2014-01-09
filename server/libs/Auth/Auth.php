@@ -25,7 +25,7 @@ class Auth {
       $_token = $this->$token;
       if (!is_null($token)) $_token = $token;
 
-      if ($this->handler->query("SELECT id_usr FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "")){
+      if ($this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "")){
           $this->handler->query("UPDATE user SET expiration = CURRENT_TIMESTAMP");
           return true;
       }else{
@@ -42,7 +42,7 @@ class Auth {
       if (!is_null($token)) $_token = $token;
       if ($this->handler->query("SELECT id_usr FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '". $token . "'")){
           $row = $result->fetch_array($result);
-          return $row['id_usr'];
+          return $row['usr_id'];
       }else{
           return 0;
       }
@@ -56,10 +56,12 @@ class Auth {
       $token = "";
       if (!$userid) return $token;
       $insertedToekn = false;
+      $tries = 5;
       do {
         $token = bin2hex(openssl_random_pseudo_bytes(16));
-        $insertedToken = $this->handler->query("INSERT INTO auth_token (token, expiration, id_usr) VALUES ('".$token."', NOW() + INTERVAL 1 HOUR, " . $userid . ")");
-      } while (!$insertedToken);
+        $insertedToken = $this->handler->query("INSERT INTO auth_tokens (token, expiration, usr_id) VALUES ('".$token."', NOW() + INTERVAL 1 HOUR, " . $userid . ")");
+        $tries--;
+      } while (!$insertedToken && !$tries);
 
       return $token;
     }
