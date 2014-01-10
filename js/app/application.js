@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'jquery_cookie', 'app/router'], function($, _, Backbone, cookie, Router){
+define(['jquery', 'underscore', 'backbone', 'jquery_cookie', 'jquery_ui', 'app/router'], function($, _, Backbone, cookie, ui, Router){
     var application = function () {
         var router = new Router(),
             access_token = '';

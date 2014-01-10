@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         cssmin: {
           compile: {
             files: {
-              'bin/styles/style.css': ['styles/normalize.css', 'styles/bootstrap.css', 'styles/bootstrap-theme.css', 'styles/bootstrap-responsive.css', 'styles/yeti.bootstrap.css', 'styles/styles.css']
+              'bin/styles/style.css': ['styles/normalize.css', 'styles/bootstrap.css', 'styles/bootstrap-theme.css', 'styles/bootstrap-responsive.css', 'styles/yeti.bootstrap.css', 'styles/styles.css', 'styles/jquery-ui.css']
             }
           }
         },

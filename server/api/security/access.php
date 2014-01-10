@@ -22,14 +22,5 @@ $app->post('/login', function () use ($system, $app) {
     };
 });
 
-$app->post('/login2', function () use ($system, $app) {
-    echo 'asjsjadsf';
-
-    $auth = new \c2si\Auth();
-    $auth->setHandler($system->handler);
-    $json = json_decode($app->request()->getBody(), true);
-    echo $json;
-});
-
 
 ?>

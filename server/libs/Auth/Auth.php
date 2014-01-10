@@ -22,7 +22,7 @@ class Auth {
     * @return: boolean: so el token es valido o no, de ser valido, renovar la fecha de expiración
     */
     public function authentificate($token = null){
-      $_token = $this->$token;
+      $_token = $this->token;
       if (!is_null($token)) $_token = $token;
 
       if ($this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "")){
