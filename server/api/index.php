@@ -5,6 +5,8 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: X-Requested-With');
 ini_set('display_errors', 1);
 
+date_default_timezone_set('UTC');
+
 // SLIM Framework, to provide REST capability and scalfolding
 require '../libs/Slim/Slim.php';
 // small propietary ORM

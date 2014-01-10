@@ -25,8 +25,8 @@ class Auth {
       $_token = $this->token;
       if (!is_null($token)) $_token = $token;
 
-      if ($this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "")){
-          $this->handler->query("UPDATE user SET expiration = CURRENT_TIMESTAMP");
+      if ($this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "'")){
+          $this->handler->query("UPDATE user SET expiration = NOW() + INTERVAL 1 HOUR WHERE token LIKE '".$token . "'");
           return true;
       }else{
           return false;
@@ -40,7 +40,7 @@ class Auth {
     public function getUserId($token = null) {
       $_token = $this->$token;
       if (!is_null($token)) $_token = $token;
-      if ($this->handler->query("SELECT id_usr FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '". $token . "'")){
+      if ($this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '". $token . "'")){
           $row = $result->fetch_array($result);
           return $row['usr_id'];
       }else{
@@ -64,6 +64,10 @@ class Auth {
       } while (!$insertedToken && !$tries);
 
       return $token;
+    }
+
+    public function obsoleteToken($token) {
+        return $this->handler->query("DELETE FROM user WHERE token LIKE '".$token . "'");
     }
 
 // Authorization area

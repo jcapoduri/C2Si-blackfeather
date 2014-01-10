@@ -36,7 +36,13 @@ $app->get('/:username', function($username) use ($app, $system) {
     if ($auth->authentificate($token)) {
         $app->render('raven.html');
     } else {
-        $app->redirect('/');
+        //$app->redirect('/');
+        $res = $system->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "'");
+        echo $system->handler->error;
+        echo $system->handler->errno;
+        var_dump($res);
+        var_dump($res->fetch_assoc());
+        var_dump($token);
     };
 });
 
