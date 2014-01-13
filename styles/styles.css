@@ -17,6 +17,48 @@ body > div {
     margin-top: 15px;
 }
 
+/* loading section */
+.loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.loader img {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    margin-left: -48px;
+    margin-top: -48px;
+}
+
+/* This parent can be any width and height */
+.block {
+  text-align: center;
+  height: 95vh;
+}
+
+/* The ghost, nudged to maintain perfect centering */
+.block:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+/* The element to be centered, can
+   also be of any width and height */
+.centered {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .editable {
 }
 

@@ -15,6 +15,10 @@ define(function() {
                 deps: ['jquery'],
                 exports: 'bootstrap'
             },
+            'bootbox': {
+                deps: ['jquery', 'bootstrap'],
+                exports: 'bootbox'
+            },
             'handlebars': {
                 exports: 'Handlebars'
             },
@@ -35,7 +39,8 @@ define(function() {
     		jquery_cookie: 'vendors/jquery/jquery-cookie',
     		jquery_ui: 'vendors/jquery/jquery-ui',
     		handlebars: 'vendors/handlebars/handlebars',
-    		bootstrap: 'vendors/bootstrap/bootstrap.min'
+    		bootstrap: 'vendors/bootstrap/bootstrap.min',
+    		bootbox: 'vendors/bootstrap/bootbox'
     	}
     });
 });
