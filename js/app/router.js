@@ -2,19 +2,23 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
 
     var router = Backbone.Router.extend({
         routes: {
-        // Define some URL routes
-        '/login': 'showLoginForm',
-        '/register': 'showUsers',
+            // Define some URL routes
+            'login': 'showLoginForm',
+            'register': 'showUsers',
 
-        // Default
-        '*actions': 'defaultAction'
+            // Default
+            '*actions': 'defaultAction'
         },
         initialize: function () {
             //init code here
         },
         showLoginForm: function () {
             debugger;
-            Raven.app.login();
+            Raven.app.logout();
+        },
+        defaultAction: function () {
+            debugger;
+
         }
     });
 

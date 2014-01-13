@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles/style.css" type="text/css" />
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
+    <body>
+        <nav class="nav navbar-inverse" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">[C2Si] black feather</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Ayuda</a></li>
+              <li>
+                <a href="#">Ingresar</a>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </nav>
+        <div id="main-container">
+            <div class="panel panel-primary form-signin">
+                <div class="panel-heading">
+                    <h3 class="panel-heading"> Ingresar </h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="login-form">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Usuario</label>
+                        <input type="text" class="form-control" id="userinput" placeholder="Ingrese su nombre de usuario">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="passinput" placeholder="Constraseña">
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Recuerdame
+                        </label>
+                      </div>
+                      <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $( function () {
+                $("#login-form").submit( function (evt) {
+                    var login = {};
+                    login.username = $("#userinput").val();
+                    login.password = $("#passinput").val();
+
+                    $.ajax({
+                        url: 'api/login',
+                        type: "POST",
+                        data: JSON.stringify(login),
+                        processData: false,
+                        contentType: "application/json; charset=utf-8",
+                        success: function() { alert('logeado correctamente'); },
+                        error: function() { alert('usuario invalido'); }
+                    })
+                    evt.preventDefault();
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>
