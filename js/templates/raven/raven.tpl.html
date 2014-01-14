@@ -1,0 +1,141 @@
+{{#if loged}}
+    <nav class="nav navbar-inverse" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">[C2Si] black feather</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{empresa}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">{{empresa_2}}</a></li>
+              <li><a href="#">{{empresa_3}}</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Configurar Actual</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{local}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">{{local_2}}</a></li>
+              <li><a href="#">{{local_3}}</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Configurar Actual</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{sub_system}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Facturas <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+              <li><a href="#">Stock <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+              <li><a href="#">Reportes <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+              <li><a href="#">Clientes <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+              <li><a href="#">Tarjetas <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+              <li class="divider"></li>
+              <li><a href="#">Configurar Actual</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Configuracion General</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Ayuda</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Perfil</a></li>
+              <li><a href="#">Mensajes</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Log out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+    <div id="main-container">
+        <div id="central-widget">
+            <article class="well">
+                <h2> Title </h2>
+            </article>
+        </div>
+    </div>
+{{else}}
+    <nav class="nav navbar-inverse" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">[C2Si] black feather</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Ayuda</a></li>
+          <li>
+            <a href="#">Registrarse</a>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+    <div id="main-container">
+        <div class="panel panel-primary form-signin">
+            <div class="panel-heading">
+                <h3 class="panel-heading"> Ingresar </h3>
+            </div>
+            <div class="panel-body">
+                <form role="form" id="login-form">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Usuario</label>
+                    <input type="text" class="form-control" id="userinput" placeholder="Ingrese su nombre de usuario">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="passinput" placeholder="Constraseña">
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> Recuerdame
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $( function () {
+            debugger;
+            $("#login-form").submit( function (evt) {
+                var login = {};
+                login.username = $("#userinput").val();
+                login.password = $("#passinput").val();
+                Raven.app.login(login);
+                Raven.showLoader();
+                evt.preventDefault();
+                return false;
+            });
+        });
+    </script>
+{{/if}}
+<div class="loader" id="loader">
+    <img src="../assets/loading.gif">
+</div>

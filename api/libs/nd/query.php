@@ -5,6 +5,7 @@ namespace Nd;
 class query {
     protected $nd;
     protected $entity;
+    protected $relation;
     protected $isRelation = false;
     protected $predicative = null;
 
@@ -24,9 +25,10 @@ class query {
     /*
     * to be implemented
     */
-    public function relation($relation_name) {
+    public function relation($relation_name, $entity_name) {
         $this->isRelation = true;
-        $this->entity = $relation_name;
+        $this->entity = $entity_name;
+        $this->relation = $relation_name;
         return $this;
     }
 
@@ -80,9 +82,40 @@ class query {
     * execute current query
     **/
     public function exec() {
-        $fields = $this->nd->getObjectFieldList($this->entity);
-        $query = "SELECT `" . join($fields, '`, `') . "` FROM " . $this->nd->entityMap($this->entity);
-        if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL();
+        if ($this->isRelation) {
+            $relation = $this->nd->getRelationInfo($this->relation);
+            $object_to = $relation["object_to"];
+            $field_to = "child";
+            $object_from = $relation["object_from"];
+            $field_from = "father";
+            $relation_name = $this->nd->entityMap($relation["name"]);
+
+
+            if ($relation["object_to"] == $this->entity) {
+                $object_to = $relation["object_from"];
+                $object_from = $relation["object_to"];
+                $field_to = "father";
+                $field_from = "child";
+            };
+
+
+            $fields = $this->nd->getObjectFieldList($object_to);
+            $object_to = $this->nd->entityMap($object_to);
+            $object_from = $this->nd->entityMap($object_from);
+
+            //generate query
+            $query = "SELECT `id` FROM " . $object_from;
+            if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL();
+
+            // create object relation
+            $query = "SELECT " . $field_to . " FROM " . $relation_name . " WHERE " . $field_from . " IN (" . $query . ")";
+            $query = "SELECT `" . join($fields, '`, `') . "` FROM " . $object_to . " WHERE id IN (" . $query . ")";
+        } else {
+            $fields = $this->nd->getObjectFieldList($this->entity);
+            $query = "SELECT `" . join($fields, '`, `') . "` FROM " . $this->nd->entityMap($this->entity);
+            if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL();
+        };
+        //echo $query;
         return $this->nd->handler->query($query);
     }
 };

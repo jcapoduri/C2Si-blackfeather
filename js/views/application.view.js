@@ -4,7 +4,7 @@ define(['jquery',
         'bootstrap',
         'handlebars',
         'models/application.model',
-        'text!templates/raven/app.tpl.html'
+        'text!templates/raven/raven.tpl.html'
     ],
     function($, _, Backbone, bootstrap, handlebars, appModel, tpl){
 

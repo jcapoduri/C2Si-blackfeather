@@ -7,7 +7,7 @@ define([
     'bootbox',
     'app/router',
     'models/application.model',
-    'views/app.view'
+    'views/application.view'
 ], function($, _, Backbone, cookie, ui, bootbox, Router, appModel, appView){
     var application = function () {
         var router = new Router(),

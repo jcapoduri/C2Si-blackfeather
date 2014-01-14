@@ -1,6 +1,6 @@
 <?php
 
-$anchor = '/app/';
+$anchor = '/apps/';
 
 /*
 * GET: return new instance of application for the current user
@@ -8,7 +8,7 @@ $anchor = '/app/';
 $app->get($anchor, function () use ($app, $system) {
     //$query = $system
     $app->response['Content-Type'] = 'application/json';
-    $app->reponse->write('{}');
+    $query = $system->query("applications");
 });
 
 

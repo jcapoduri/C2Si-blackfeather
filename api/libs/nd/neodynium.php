@@ -398,7 +398,14 @@ class neodynium {
         return $this->allFields($obj);
     }
 
-    public function query($entity) {
+    public function getRelationInfo($rel_name) {
+        return $this->relations[$rel_name];
+    }
+
+    /*
+    *
+    **/
+    public function query($entity, $object_from = null, query $secondary_query = null) {
         $query = new query($this);
         return $query->entity($entity);
     }

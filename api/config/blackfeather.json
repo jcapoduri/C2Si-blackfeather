@@ -6,6 +6,36 @@
     },
     "objects": [
         {
+            "name" : "application",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "dependencies",
+                    "type": "array",
+                    "relation_name": "application_to_resource"
+                }
+            ]
+        },
+        {
+            "name": "business",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "apps",
+                    "type": "array",
+                    "relation_name": "application_for_business"
+                }
+            ]
+        },
+        {
             "name" : "user",
             "nd_fields": true,
             "fields": [
@@ -20,6 +50,11 @@
                 {
                     "name": "password",
                     "type": "string"
+                },
+                {
+                    "name": "available_business",
+                    "type": "array",
+                    "relation_name": "user_available_business"
                 }
             ]
         },
@@ -54,9 +89,69 @@
                     "type": "string"
                 }
             ]
+        },
+        {
+            "name" : "resource",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "dependencies",
+                    "type": "array",
+                    "relation_name": "resource_to_resource"
+                }
+            ]
+        },
+        {
+            "name" : "resource_access",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "object",
+                    "object_name": "user"
+                },
+                {
+                    "name": "resource",
+                    "type": "object",
+                    "object_name": "resource"
+                }
+            ]
         }
     ],
-    "relations": [],
+    "relations": [
+            {
+    			"name": "resource_to_resource",
+    			"nd_fields": true,
+    			"type": "many-to-many",
+    			"object_from": "resource",
+    			"object_to": "resource"
+    		},
+    		{
+    			"name": "application_to_resource",
+    			"nd_fields": true,
+    			"type": "many-to-many",
+    			"object_from": "application",
+    			"object_to": "resource"
+    		},
+    		{
+    		    "name": "application_for_business",
+    			"nd_fields": true,
+    			"type": "many-to-many",
+    			"object_from": "business",
+    			"object_to": "application"
+    		},
+    		{
+    		    "name": "user_available_business",
+    		    "nd_fields": true,
+    			"type": "many-to-many",
+    			"object_from": "business",
+    			"object_to": "application"
+    		}
+        ],
     "storages": [
         {
             "name": "sql_dev",
@@ -85,7 +180,13 @@
             "map": {
                 "user" : "users",
                 "user_extends" : "user_extends",
-                "personal_information": "personal_informations"
+                "personal_information": "personal_informations",
+                "application": "applications",
+                "resource": "auth_resources",
+                "resource_access": "auth_resources_access",
+                "resource_to_resource": "auth_resources_resources",
+                "application_to_resource": "applications_dependencies",
+                "user_available_business": "user_business"
             }
         }
     }

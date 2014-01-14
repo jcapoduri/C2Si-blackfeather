@@ -39,10 +39,11 @@ class Auth {
     * @return: id del usuario del token o -1
     */
     public function getUserId($token = null) {
-      $_token = $this->$token;
+      $_token = $this->token;
       if (!is_null($token)) $_token = $token;
-      if ($this->handler->query("SELECT id_usr FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '". $token . "'")){
-          $row = $result->fetch_array($result);
+      $result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > NOW() AND token LIKE '". $_token . "'");
+      if ($result){
+          $row = $result->fetch_assoc();
           return $row['usr_id'];
       }else{
           return 0;
