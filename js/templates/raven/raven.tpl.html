@@ -15,10 +15,11 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{empresa}} <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Empresa <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="#">{{empresa_2}}</a></li>
-              <li><a href="#">{{empresa_3}}</a></li>
+              {{#each availableBusiness}}
+              <li><a href="#">{{name}}</a></li>
+              {{/each}}
               <li class="divider"></li>
               <li><a href="#">Configurar Actual</a></li>
             </ul>
@@ -26,7 +27,7 @@
         </ul>
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{local}} <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Local <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="#">{{local_2}}</a></li>
               <li><a href="#">{{local_3}}</a></li>
@@ -37,13 +38,11 @@
         </ul>
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{sub_system}} <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applicación <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Facturas <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-              <li><a href="#">Stock <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-              <li><a href="#">Reportes <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-              <li><a href="#">Clientes <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-              <li><a href="#">Tarjetas <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+              {{#each availableBusiness}}
+              <li><a href="#">{{name}} <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+              {{/each}}
               <li class="divider"></li>
               <li><a href="#">Configurar Actual</a></li>
               <li class="divider"></li>
@@ -54,13 +53,13 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Ayuda</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user}} <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{username}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="#">Perfil</a></li>
               <li><a href="#">Mensajes</a></li>
               <li><a href="#">Something else here</a></li>
               <li class="divider"></li>
-              <li><a href="#">Log out</a></li>
+              <li><a href="#logout">Log out</a></li>
             </ul>
           </li>
         </ul>

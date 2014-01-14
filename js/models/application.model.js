@@ -1,26 +1,32 @@
-define(['jquery', 'underscore', 'backbone', 'bootbox'], function($, _, Backbone, bootbox){
-    var appModel = Backbone.Model.extend({
+define(['jquery', 'underscore', 'backbone', 'bootstrap', 'bootbox', 'models/raven/user.model'], function($, _, Backbone, bootstrap, bootbox, userModel){
+    var appModel = userModel.extend({
         initialize: function(){},
         defaults: {
-            token: "",
-            username: "",
-            admin: false,
             loged: false
         },
         setUp: function() {
-            debugger;
-            $.ajax({
-                url: "/api/noop",
+            Raven.showLoader();
+            /*$.ajax({
+                url: "/api/my",
                 type: "GET",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    this.set('loged', true);
+
+                    Raven.hideLoader();
+                    Raven.router.navigate('');
+                }.bind(this),
+                error: this.logout.bind(this)
+            });*/
+            this.fetch({
                 success: function (data) {
                     this.set('loged', true);
                     Raven.hideLoader();
                     Raven.router.navigate('');
                 }.bind(this),
                 error: this.logout.bind(this)
-            });
+            })
         },
         logout: function() {
             debugger;
@@ -56,6 +62,7 @@ define(['jquery', 'underscore', 'backbone', 'bootbox'], function($, _, Backbone,
                             }
                           }
                         });
+                        Raven.hideLoader();
                     }
             })
         }
