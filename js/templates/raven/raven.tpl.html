@@ -1,102 +1,86 @@
+{{#if ready}}
+<nav class="nav navbar-inverse" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">[C2Si] black feather</a>
+  </div>
 {{#if loged}}
-    <nav class="nav navbar-inverse" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">[C2Si] black feather</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Empresa <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              {{#each availableBusiness}}
-              <li><a href="#">{{name}}</a></li>
-              {{/each}}
-              <li class="divider"></li>
-              <li><a href="#">Configurar Actual</a></li>
-            </ul>
-          </li>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Empresa <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          {{#each availableBusiness}}
+          <li><a href="#">{{name}}</a></li>
+          {{/each}}
+          <li class="divider"></li>
+          <li><a href="#">Configurar Actual</a></li>
         </ul>
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Local <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">{{local_2}}</a></li>
-              <li><a href="#">{{local_3}}</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Configurar Actual</a></li>
-            </ul>
-          </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Local <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">{{local_2}}</a></li>
+          <li><a href="#">{{local_3}}</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Configurar Actual</a></li>
         </ul>
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applicación <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              {{#each availableBusiness}}
-              <li><a href="#">{{name}} <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-              {{/each}}
-              <li class="divider"></li>
-              <li><a href="#">Configurar Actual</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Configuracion General</a></li>
-            </ul>
-          </li>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applicación <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          {{#each availableBusiness}}
+          <li><a href="#">{{name}} <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+          {{/each}}
+          <li class="divider"></li>
+          <li><a href="#">Configurar Actual</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Configuracion General</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Ayuda</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{username}} <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Perfil</a></li>
-              <li><a href="#">Mensajes</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#logout">Log out</a></li>
-            </ul>
-          </li>
+      </li>
+    </ul>
+{{/if}}
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Ayuda</a></li>
+{{#if loged}}
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{username}} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Perfil</a></li>
+          <li><a href="#">Mensajes</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#logout">Log out</a></li>
         </ul>
-      </div><!-- /.navbar-collapse -->
-    </nav>
-    <div id="main-container">
-        <div id="central-widget">
-            <article class="well">
-                <h2> Title </h2>
-            </article>
-        </div>
+      </li>
+{{else}}
+    <li>
+        <a href="#">Registrarse</a>
+    </li>
+{{/if}}
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+<div id="main-container">
+{{#if loged}}
+    <div id="central-widget">
+        <article class="well">
+            <h2> Title </h2>
+        </article>
     </div>
 {{else}}
-    <nav class="nav navbar-inverse" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">[C2Si] black feather</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Ayuda</a></li>
-          <li>
-            <a href="#">Registrarse</a>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </nav>
-    <div id="main-container">
-        <div class="panel panel-primary form-signin">
+   <div class="panel panel-primary form-signin">
             <div class="panel-heading">
                 <h3 class="panel-heading"> Ingresar </h3>
             </div>
@@ -135,6 +119,5 @@
         });
     </script>
 {{/if}}
-<div class="loader" id="loader">
-    <img src="../assets/loading.gif">
 </div>
+{{/if}}

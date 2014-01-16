@@ -5,16 +5,32 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
             // Define some URL routes
             'login': 'showLoginForm',
             'register': 'showUsers',
-
+            'logout': 'logout',
+            'app/raven': 'defaultAction',
+            'business/:name/app/:appname': 'defaultAction',
             // Default
             '*actions': 'defaultAction'
+
         },
         initialize: function () {
             //init code here
+            this.access_token = $.cookie('ACCESS_TOKEN');
+            Backbone.history.start();
+            if (this.access_token) {
+                //get info from token
+                $.ajaxSetup({
+                    headers: { 'ACCESS_TOKEN': this.access_token }
+                });
+
+            } else {
+                this.navigate('/login', {trigger: true});
+            };
         },
         showLoginForm: function () {
-            debugger;
-            Raven.app.logout();
+            if (!!Raven) Raven.app.logout();
+        },
+        logout: function () {
+          this.navigate('/login', {trigger: true});
         },
         defaultAction: function () {
             debugger;

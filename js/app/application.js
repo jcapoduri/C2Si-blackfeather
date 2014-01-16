@@ -18,20 +18,7 @@ define([
         var
         initialize = function (){
             main_view.render();
-            this.access_token = $.cookie('ACCESS_TOKEN');
-            if (this.access_token) {
-                //get info from token
-                $.ajaxSetup({
-                    headers: { 'ACCESS_TOKEN': this.access_token }
-                });
-                application.setUp();
-                Backbone.history.start();
-            } else {
-                //go to login
-                debugger;
-                Backbone.history.start();
-                router.navigate('/login', {trigger: true});
-            };
+            application.setUp();
         },
         publicRegion = {
             init: function () {

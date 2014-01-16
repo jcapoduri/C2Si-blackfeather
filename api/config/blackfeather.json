@@ -32,6 +32,21 @@
                     "name": "apps",
                     "type": "array",
                     "relation_name": "application_for_business"
+                },
+                {
+                    "name" : "locals",
+                    "type": "array",
+                    "relation_name": "locals_from_business"
+                }
+            ]
+        },
+        {
+            "name": "local",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "name",
+                    "type": "string"
                 }
             ]
         },
@@ -148,8 +163,15 @@
     		    "name": "user_available_business",
     		    "nd_fields": true,
     			"type": "many-to-many",
+    			"object_from": "user",
+    			"object_to": "business"
+    		},
+    		{
+    		    "name": "locals_from_business",
+    		    "nd_fields": true,
+    			"type": "many-to-many",
     			"object_from": "business",
-    			"object_to": "application"
+    			"object_to": "local"
     		}
         ],
     "storages": [
@@ -183,10 +205,14 @@
                 "personal_information": "personal_informations",
                 "application": "applications",
                 "resource": "auth_resources",
+                "business": "businesses",
+                "local": "locals",
                 "resource_access": "auth_resources_access",
                 "resource_to_resource": "auth_resources_resources",
                 "application_to_resource": "applications_dependencies",
-                "user_available_business": "user_business"
+                "user_available_business": "user_business",
+                "locals_from_business": "business_locals",
+                "application_for_business": "business_applications"
             }
         }
     }

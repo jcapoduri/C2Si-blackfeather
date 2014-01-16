@@ -1,27 +1,25 @@
 define(['jquery', 'underscore', 'backbone', 'bootstrap', 'bootbox', 'models/raven/user.model'], function($, _, Backbone, bootstrap, bootbox, userModel){
     var appModel = userModel.extend({
-        initialize: function(){},
+        initialize: function(){
+            this.on('change:availableBusiness', this.setCurrentBusiness, this);
+        },
         defaults: {
-            loged: false
+            loged: false,
+            ready: false,
+            currentBusiness: "[None]",
+            currentLocal: "[None]"
+        },
+        setCurrentBusiness: function () {
+            this.attributes.currentBusiness = this.get('availableBusiness').at(0);
+            this.attributes.currentLocal = this.get('currentBusiness');
+            this
         },
         setUp: function() {
             Raven.showLoader();
-            /*$.ajax({
-                url: "/api/my",
-                type: "GET",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    this.set('loged', true);
-
-                    Raven.hideLoader();
-                    Raven.router.navigate('');
-                }.bind(this),
-                error: this.logout.bind(this)
-            });*/
             this.fetch({
                 success: function (data) {
                     this.set('loged', true);
+                    this.set('ready', true);
                     Raven.hideLoader();
                     Raven.router.navigate('');
                 }.bind(this),
@@ -29,8 +27,8 @@ define(['jquery', 'underscore', 'backbone', 'bootstrap', 'bootbox', 'models/rave
             })
         },
         logout: function() {
-            debugger;
             this.set('loged', false);
+            this.set('ready', true);
             this.set('token', '');
             Raven.hideLoader();
         },

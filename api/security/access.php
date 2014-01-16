@@ -41,9 +41,10 @@ $app->get('/my', function () use ($system, $app) {
     $auth = new \c2si\Auth();
     $auth->setHandler($system->handler);
     $token = $app->request->headers->get('ACCESS_TOKEN');
-
-    $userid = $auth->getUserId($token);;
+    $userid = $auth->getUserId($token);
     $user = $system->readObject("user", $userid);
+    // TODO clear unavailable apps for the user
+
     $app->response['Content-Type'] = 'application/json';
     $app->response->write(json_encode($user));
 });

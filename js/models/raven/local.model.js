@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
-    var appModel = Backbone.Model.extend({
+    var localModel = Backbone.Model.extend({
         initialize: function(){},
         url: '/api/apps',
         defaults: {
@@ -8,5 +8,5 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone){
         }
     })
 
-    return appModel;
+    return localModel;
 });

@@ -26,7 +26,8 @@ class Auth {
       if (!is_null($token)) $_token = $token;
       if (is_null($_token)) return false;
         //var_dump("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "'");
-      if ($this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '" . $_token . "'")){
+      $result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '" . $_token . "'");
+      if ($result->num_rows){
           $this->handler->query("UPDATE user SET expiration = NOW() + INTERVAL 1 HOUR");
           return true;
       }else{
@@ -44,7 +45,7 @@ class Auth {
       $result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > NOW() AND token LIKE '". $_token . "'");
       if ($result){
           $row = $result->fetch_assoc();
-          return $row['usr_id'];
+          return is_null($row['usr_id']) ? 0 : $row['usr_id'];
       }else{
           return 0;
       }

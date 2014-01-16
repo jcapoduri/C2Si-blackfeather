@@ -26,6 +26,7 @@ define(['jquery',
         template: handlebars.compile(tpl),
         render: function (){
             this.$el.html(this.template(this.mainapp.toJSON()));
+            $('.dropdown-toggle').dropdown();
         },
         load: function() { this.project.fetch(); },
         save: function() { this.project.save(); }
