@@ -18,14 +18,15 @@ define([
         var
         initialize = function (){
             main_view.render();
+            Backbone.history.start();
             application.setUp();
         },
         publicRegion = {
-            init: function () {
+            initialize: function () {
                 initialize();
                 return publicRegion;
             },
-            get router() {
+            get router () {
                 return router;
             },
             get app() {
@@ -33,14 +34,6 @@ define([
             },
             get view() {
                 return main_view;
-            },
-            addPath: function(path, fn) {
-                router.on(path, fn);
-                return publicRegion;
-            },
-            removePath: function(path, fn) {
-                router.off(path, fn);
-                return publicRegion;
             },
             showLoader: function() { $('#loader').show(); },
             hideLoader: function() { $('#loader').hide(); }

@@ -6,6 +6,20 @@
     },
     "objects": [
         {
+            "name": "applicants",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "email",
+                    "type": "string"
+                },
+                {
+                    "name": "security_token",
+                    "type": "string"
+                }
+            ]
+        },
+        {
             "name" : "application",
             "nd_fields": true,
             "fields": [
@@ -207,6 +221,7 @@
                 "resource": "auth_resources",
                 "business": "businesses",
                 "local": "locals",
+                "applicants": "applicants",
                 "resource_access": "auth_resources_access",
                 "resource_to_resource": "auth_resources_resources",
                 "application_to_resource": "applications_dependencies",

@@ -34,6 +34,7 @@ define(function() {
     	paths: {
     	    text: 'vendors/requirejs/text',
     	    backbone: 'vendors/backbone/backbone',
+    	    epoxy: 'vendors/backbone/epoxy',
     		underscore: 'vendors/underscore/underscore',
     		jquery: 'vendors/jquery/jquery.min',
     		jquery_cookie: 'vendors/jquery/jquery-cookie',

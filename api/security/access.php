@@ -42,7 +42,7 @@ $app->get('/my', function () use ($system, $app) {
     $auth->setHandler($system->handler);
     $token = $app->request->headers->get('ACCESS_TOKEN');
     $userid = $auth->getUserId($token);
-    $user = $system->readObject("user", $userid);
+    $user = $system->readObject("user", 1);
     // TODO clear unavailable apps for the user
 
     $app->response['Content-Type'] = 'application/json';

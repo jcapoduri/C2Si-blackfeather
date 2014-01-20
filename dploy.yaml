@@ -6,9 +6,10 @@ dev:
     pass: "abcd1234"
     check: true
     revision: "test"
+    exclude: ["*.yaml", "*.json", "mockups/**/*.js", "nd/**/*.js", "**/*.md"]
     path:
-        local: 'bin/'
         remote: "public_html/dblackfeather/"
+
 
 stage:
     scheme: ftp

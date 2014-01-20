@@ -66,7 +66,7 @@
       </li>
 {{else}}
     <li>
-        <a href="#">Registrarse</a>
+        <a href="#register">Registrarse</a>
     </li>
 {{/if}}
     </ul>
@@ -106,7 +106,6 @@
     </div>
     <script type="text/javascript">
         $( function () {
-            debugger;
             $("#login-form").submit( function (evt) {
                 var login = {};
                 login.username = $("#userinput").val();
