@@ -149,6 +149,76 @@
                     "object_name": "resource"
                 }
             ]
+        },
+        {
+            "name": "contact_info",
+            "fields": [
+                {
+                    "name": "contact_type",
+                    "type": "number"
+                },
+                {
+                    "name": "detail",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "contact_address"
+            "fields": [
+                {
+                    "name": "address1",
+                    "type": "string"
+                },
+                {
+                    "name": "address2",
+                    "type": "string"
+                },
+                {
+                    "name": "country",
+                    "type": "number"
+                },
+                {
+                    "name": "state",
+                    "type": "number"
+                },
+                {
+                    "name": "city",
+                    "type": "number"
+                },
+                {
+                    "name": "postal_code",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "client",
+            "nd_fields": true,
+            "fields": [
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "cuit",
+                    "type": "number"
+                },
+                {
+                    "name": "condition_type",
+                    "type": "number"
+                },
+                {
+                    "name": "contacts",
+                    "type": "array",
+                    "relation_name": "clients_info"
+                },
+                {
+                    "name": "address",
+                    "type": "array",
+                    "relation_name": "clients_address"
+                }
+            ]
         }
     ],
     "relations": [
@@ -186,6 +256,20 @@
     			"type": "many-to-many",
     			"object_from": "business",
     			"object_to": "local"
+    		},
+    		{
+    		    "name": "clients_info",
+    		    "nd_fields": true,
+    			"type": "many-to-many",
+    			"object_from": "client",
+    			"object_to": "contact_info"
+    		},
+    		{
+    		    "name": "clients_address",
+    		    "nd_fields": true,
+    			"type": "many-to-many",
+    			"object_from": "client",
+    			"object_to": "contact_address"
     		}
         ],
     "storages": [
@@ -222,6 +306,9 @@
                 "business": "businesses",
                 "local": "locals",
                 "applicants": "applicants",
+                "clients": "clients",
+                "client_info": "clients_contact_info",
+                "client_address": "clients_contact_address",
                 "resource_access": "auth_resources_access",
                 "resource_to_resource": "auth_resources_resources",
                 "application_to_resource": "applications_dependencies",

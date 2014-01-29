@@ -12,21 +12,15 @@
     $system = new \nd\neodynium($config_json);
     $system->startApp("web");
 
-    //var_dump($system);
-
-    /*$query = $system->query("user")->filterBy("username", "startWith", "J")->orBy("username", "startWith", "s");
-    $res  =$query->exec();
-    var_dump($res);
-    echo $system->handler->error;
-    echo $system->handler->errno;
-    while ($rep = $res->fetch_assoc()) var_dump($rep);*/
-
-    $query = new \nd\query($system);
+    /*$query = new \nd\query($system);
     $query->relation("application_to_resource", "resource");
     $res = $query->exec();
     var_dump($res);
     echo $system->handler->error;
     echo $system->handler->errno;
-    while ($rep = $res->fetch_assoc()) var_dump($rep);
+    while ($rep = $res->fetch_assoc()) var_dump($rep);*/
+
+    $test = new \nd\persistence($system);
+    $test->generatePersistence();
 
 ?>

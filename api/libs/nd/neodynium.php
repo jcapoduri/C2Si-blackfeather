@@ -321,6 +321,14 @@ class neodynium {
         return $this->app["map"][$entity_name];
     }
 
+    public function getObjectList() {
+        return $this->objects;
+    }
+
+    public function getRelationList() {
+        return $this->relations;
+    }
+
     public function parentRelation($rel_name, $child_id) {
     $relation = $this->relations[$rel_name];
             $obj_to = $this->objects[$relation["object_from"]];
@@ -466,12 +474,12 @@ class neodynium {
 
     public function endTransaction() {}
 
-    private $objects;
-    private $relations;
-    private $storages;
-    private $apps;
-    private $app;
-    private $raw;
+    protected $objects;
+    protected $relations;
+    protected $storages;
+    protected $apps;
+    protected $app;
+    protected $raw;
     public  $handler;
 
     public static $nd_fields = array(

@@ -2,10 +2,13 @@
 
 namespace Nd;
 
-require 'error.php';
+require_once 'error.php';
 
 class persistence {
     protected $nd;
+    protected $entities;
+    protected $handler;
+
     static protected $basis = 'CREATE TABLE IF NOT EXISTS `basic` (
                                   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
                                   `deleted` tinyint(1) NOT NULL DEFAULT \'0\',
@@ -14,7 +17,7 @@ class persistence {
                                   `dtime` timestamp NOT NULL DEFAULT \'0000-00-00 00:00:00\',
                                   PRIMARY KEY (`id`),
                                   KEY `deleted` (`deleted`)
-                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;'
+                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;';
 
     static protected $basisrel = 'CREATE TABLE IF NOT EXISTS `basic_rel` (
                                   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -31,21 +34,62 @@ class persistence {
 
     public function __construct (neodynium $system) {
         $this->nd = $system;
-    };
-
-    public function generatePersistence() {
-
+        $this->entities = array();
+        $this->handler = $this->nd->handler;
     }
 
-    protected function generateBasis () {};
+    public function generatePersistence() {
+        //start a transaction
+        $this->nd->handler->autocommit(false);
+        $this->generateBasis();
 
-    protected function generateEntity () {};
+        $handler = $this->handler->query('SHOW TABLES');
+        while ($entity = $handler->fetch_assoc()) array_push($this->entities, $entity);
 
-    protected function generateRelation () {};
+        //check for all objects;
+        $objects = $this->nd->getObjectList();
+        $keys = array_keys($objects);
+        $len = count($keys);
 
-    /*public function () {}
+        for ($i = 0; $i < $len; $i++) {
+            $object = $objects[$keys[$i]];
+            //var_dump($object);
+            $mapname = $this->nd->entityMap($keys[$i]);
+            if (isset($this->entities[$mapname])) {
+                $this->generateEntity($mapname, $object);
+            } else {
+                $this->updateEntity($mapname, $object);
+            };
+        };
 
-    public function () {}*/
+        if ($this->handler->commit()) {
+            //all ok
+            return true;
+        } else {
+            //fail
+        };
+        $this->handler->autocommit(true);
+    }
+
+    protected function generateBasis () {
+        $this->handler->query(self::$basis);
+        $this->handler->query(self::$basisrel);
+    }
+
+    protected function generateEntity ($table, $obj) {
+        $this->handler->query('CREATE TABLE IF NOT EXISTS `' . $table . '` LIKE `basic`');
+        //cycle between fields
+    }
+
+    protected function updateEntity ($table, $obj) {
+        $columns_data = $this->handler->query('SHOW COLUMNS FROM `' . $table . '`');
+        while ($column_data = $columns_data->fetch_assoc()) var_dump($column_data);
+    }
+
+    protected function generateRelation ($table) {
+        return $this->handler->query('CREATE TABLE IF NOT EXISTS `' . $table . '` LIKE `basic_rel`');
+    }
+
 };
 
 ?>
