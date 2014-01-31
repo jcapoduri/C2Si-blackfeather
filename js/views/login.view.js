@@ -38,7 +38,7 @@ define(['jquery',
             }
         },
         showErrors: function (model, errors, options) {},
-        login: function (evt) { 
+        login: function (evt) {
             this.model.save({
                 success: function(response) {
                     $.ajaxSetup({
@@ -62,6 +62,8 @@ define(['jquery',
                         Raven.hideLoader();
                     }
             });
+            evt.preventDefault();
+            return false;
         }
     });
 
