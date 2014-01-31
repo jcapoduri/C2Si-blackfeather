@@ -10,9 +10,10 @@ body {
   background: radial-gradient(farthest-side ellipse at 10% 0, rgba(102,105,104,0.9),rgba(93,112,119,0.89),rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");
   background: -webkit-radial-gradient(10% 0, farthest-side ellipse, rgba(102,105,104,0.9), rgba(93,112,119,0.89), rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");
   background: -moz-radial-gradient(10% 0, farthest-side ellipse, rgba(102,105,104,0.9), rgba(93,112,119,0.89), rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");
+  overflow: hidden;
 }
 
-body > div {
+body article {
     margin-top: 15px;
 }
 
@@ -71,7 +72,7 @@ body > div {
 
 aside {
     background: linear-gradient(to right,#3a3633 93%,#2a2725 100%);
-    height: 95vh;
+    height: 96vh;
 }
 
 aside#side-widget{
@@ -89,6 +90,11 @@ aside#side-widget:hover{
     overflow: hidden;
 }
 
+.main-container {
+  height: 95vh;
+  overflow: scroll;
+}
+
 ul.navlist {
     list-style: none;
     width: 100%;
@@ -99,7 +105,7 @@ ul.navlist > li {
     display: block;
     min-height: 20px;
     padding: 5px 10px 5px 10px;
-    border-bottom: 1px #666;
+    border-bottom: 1px #666 solid;
     color: #666;
 }
 

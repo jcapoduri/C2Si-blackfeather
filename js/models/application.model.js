@@ -30,7 +30,7 @@ define(['jquery', 'underscore', 'backbone', 'bootstrap', 'bootbox', 'models/rave
             this.set('loged', false);
             this.set('ready', true);
             this.set('token', '');
-            Raven.hideLoader();
+            Raven.router.navigate('/login', {trigger: true});
         },
         login: function(login) {
             $.ajax({

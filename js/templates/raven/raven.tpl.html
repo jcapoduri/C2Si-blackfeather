@@ -1,4 +1,3 @@
-{{#if ready}}
 <nav class="nav navbar-inverse" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
@@ -73,50 +72,4 @@
   </div><!-- /.navbar-collapse -->
 </nav>
 <div id="main-container">
-{{#if loged}}
-    <div id="central-widget">
-        <article class="well">
-            <h2> Title </h2>
-        </article>
-    </div>
-{{else}}
-   <div class="panel panel-primary form-signin">
-            <div class="panel-heading">
-                <h3 class="panel-heading"> Ingresar </h3>
-            </div>
-            <div class="panel-body">
-                <form role="form" id="login-form">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Usuario</label>
-                    <input type="text" class="form-control" id="userinput" placeholder="Ingrese su nombre de usuario">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="passinput" placeholder="Constraseña">
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Recuerdame
-                    </label>
-                  </div>
-                  <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $( function () {
-            $("#login-form").submit( function (evt) {
-                var login = {};
-                login.username = $("#userinput").val();
-                login.password = $("#passinput").val();
-                Raven.app.login(login);
-                Raven.showLoader();
-                evt.preventDefault();
-                return false;
-            });
-        });
-    </script>
-{{/if}}
 </div>
-{{/if}}
