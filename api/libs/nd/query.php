@@ -8,6 +8,7 @@ class query {
     protected $relation;
     protected $isRelation = false;
     protected $predicative = null;
+    protected $order = null;
 
     public function __construct(neodynium $nd) {
         $this->nd = $nd;
@@ -69,7 +70,13 @@ class query {
         $this->predicative->logical_not($pred);
         return $this;
     }
-
+    
+      public function orderBy($column, $orderType, $query) {
+        $order = new order();
+        $this->order->OrderToSql();
+        return $this;
+    }
+    
 
     /*
     *

@@ -164,7 +164,7 @@
             ]
         },
         {
-            "name": "contact_address"
+            "name": "contact_address",
             "fields": [
                 {
                     "name": "address1",
