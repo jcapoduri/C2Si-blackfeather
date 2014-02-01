@@ -72,8 +72,7 @@ class query {
     }
     
       public function orderBy($column, $orderType, $query) {
-        $order = new order();
-        $this->order->OrderToSql();
+        $this->order = new order($column, $orderType);
         return $this;
     }
     
@@ -121,6 +120,7 @@ class query {
             $fields = $this->nd->getObjectFieldList($this->entity);
             $query = "SELECT `" . join($fields, '`, `') . "` FROM " . $this->nd->entityMap($this->entity);
             if (!is_null($this->predicative)) $query .= " WHERE " . $this->predicative->generateSQL();
+            if (!is_null($this->order)) $query .=  $this->order->generateSQL();
         };
         //echo $query;
         return $this->nd->handler->query($query);

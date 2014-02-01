@@ -8,6 +8,7 @@ define(['jquery',
     ],
     function($, _, Backbone, bootstrap, handlebars, appModel, tpl){
 
+
     var view = Backbone.View.extend({
         mainapp: null,
         initialize: function (model) {

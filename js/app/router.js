@@ -1,8 +1,14 @@
-define(['jquery', 'underscore', 'backbone', 'jquery_cookie'], function($, _, Backbone, cookie){
-    var startApp = function(module) {
-        module.init($("#main-container"));
+define(['jquery', 'underscore', 'backbone', 'jquery_cookie', 'handlebars',], function($, _, Backbone, cookie, handlebars){
+    var startApp = function(module, subApp) {
+        module.init($("#main-container"), subApp);
         Raven.hideLoader();
     };
+
+    var startSubApp = function(module) {
+        module.init($("#central-widget"));
+        Raven.hideLoader();
+    };
+
     var router = Backbone.Router.extend({
         routes: {
             // Define some URL routes
@@ -11,10 +17,9 @@ define(['jquery', 'underscore', 'backbone', 'jquery_cookie'], function($, _, Bac
             'logout': 'logout',
             'app/raven': 'defaultAction',
             'business/:name/app/:appname': 'defaultAction',
+            'home': 'start',
             // Default
-            '*actions': 'defaultAction',
-            'home': 'start'
-
+            '*actions': 'defaultAction'
         },
         initialize: function () {
             //init code here
@@ -42,7 +47,7 @@ define(['jquery', 'underscore', 'backbone', 'jquery_cookie'], function($, _, Bac
 
         },
         start: function () {
-            require(['app/raven.app'], startApp);  
+            require(['app/raven.app'], startApp);
         }
     });
 

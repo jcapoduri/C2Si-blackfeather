@@ -45,7 +45,7 @@ define(['jquery',
                         headers: { 'ACCESS_TOKEN': response }
                     });
                     $.cookie('ACCESS_TOKEN', response);
-                    Raven.router.navigate('home');
+                    Raven.router.navigate('/home', {trigger: true});
                 },
                 error: function() {
                         bootbox.dialog({

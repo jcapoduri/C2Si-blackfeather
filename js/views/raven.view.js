@@ -1,11 +1,12 @@
-define(['jquery',
-        'underscore',
-        'backbone',
-        'bootbox',
-        'handlebars',
-        'text!templates/app.tpl.html'
-    ],
-    function($, _, Backbone, bootbox, handlebars, tpl){
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'bootbox',
+    'handlebars',
+    'text!templates/raven/app.tpl.html'
+],
+function($, _, Backbone, bootbox, handlebars, tpl){
 
     var view = Backbone.View.extend({
         operations: [
@@ -29,7 +30,7 @@ define(['jquery',
         el: document.body,
         template: handlebars.compile(tpl),
         render: function (){
-            this.$el.html(this.template({}));
+            this.$el.html(this.template(this.model));
             this.$el.find('input').tooltip();
         },
         change: function (evt) {

@@ -1,19 +1,29 @@
 define([
     'views/raven.view'
-    ], function (registerView) {
+    ], function (appView) {
 
     var app = {
         operations: [
             {
                 "name": "Inicio",
-                "url": "",
-                "op": {}
+                "url": ""
             }
         ],
-        widgets: [],
-        init: function (el) {
-            this.view = new registerView(el, this);
-            view.render();
+        tiles: [
+            {
+                "title": "cargar empresa",
+                "info": "",
+                "module": "name"
+            },
+            {
+                "title": "cargar usuario",
+                "info": "",
+                "module": ""
+            }
+        ],
+        init: function (el, subapp) {
+            this.view = new appView(el, this);
+            this.view.render();
         }
     };
 
