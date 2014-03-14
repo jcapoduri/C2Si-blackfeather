@@ -3,13 +3,12 @@ define(['jquery',
         'backbone',
         'bootbox',
         'handlebars',
-        'epoxy',
         'models/register.model',
         'text!templates/register.tpl.html'
     ],
-    function($, _, Backbone, bootbox, handlebars, epoxy, regModel, tpl){
+    function($, _, Backbone, bootbox, handlebars, regModel, tpl){
 
-    var view = Backbone.Epoxy.View.extend({
+    var view = Backbone.View.extend({
         initialize: function (elem) {
             this.$el = elem;
             this.el = elem[0];
@@ -50,9 +49,7 @@ define(['jquery',
         },
         showErrors: function (model, errors, options) {},
         register: function (evt) {
-            console.log(this.model.toJSON());
-            debugger;
-            this.model.save({
+            this.model.save(this.model.toJSON(), {
                 success: function () {},
                 error: function () {}
             });

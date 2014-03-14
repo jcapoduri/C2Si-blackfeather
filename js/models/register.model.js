@@ -1,5 +1,6 @@
 define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
     var model = Backbone.Model.extend({
+		url: 'api/register/user',
         defaults: {
             "email": "",
             "email2": "",
@@ -9,8 +10,8 @@ define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
         },
         validate: function (attrs) {
             var error = {};
-		    if (attrs.email) {
-		        if (attrs.email.length !== 11) {
+		    /*if (attrs.email) {
+				if (attrs.email.length !== 11) {
 		            error.email = "CUIT invalido, no contiene 11 caracteres";
 		        }
 		        if (!(!isNaN(parseFloat(attrs.cuit)) && isFinite(attrs.cuit))) {
@@ -37,7 +38,7 @@ define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
 		        if (attrs.password.length < 8) {
 		            error.password = "password demasiado corto";
 		        }
-		    };
+		    };*/
 
 		    if (!_.isEmpty(error)) return error;
         }

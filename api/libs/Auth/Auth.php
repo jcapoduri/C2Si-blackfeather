@@ -1,13 +1,7 @@
 <?php
 
-namespace c2si;
-
 class Auth {
-    /**
-    * esctructura del $handler:
-    *
-    */
-    protected $handler;
+    
     protected $token;
 
     public function __construct($token = null){
@@ -15,7 +9,6 @@ class Auth {
     }
 
 // Authentication Area
-    public function setHandler($handler){ $this->handler = $handler; }
 
     /**
     * @param: token: access token a validar
@@ -26,9 +19,10 @@ class Auth {
       if (!is_null($token)) $_token = $token;
       if (is_null($_token)) return false;
         //var_dump("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '".$token . "'");
-      $result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > CURRENT_TIMESTAMP AND token LIKE '" . $_token . "'");
-      if ($result->num_rows){
-          $this->handler->query("UPDATE user SET expiration = NOW() + INTERVAL 1 HOUR");
+      $authtoken = R::findOne('authtoken', 'expiration > now() AND token LIKE ?', [$_token]);      
+      if ($authtoken){
+          $authtoken->expiration = date(DateTime::ISO8601, time() + (1 * 60 * 60));
+          R::store($authtoken);
           return true;
       }else{
           return false;
@@ -42,10 +36,10 @@ class Auth {
     public function getUserId($token = null) {
       $_token = $this->token;
       if (!is_null($token)) $_token = $token;
-      $result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > NOW() AND token LIKE '". $_token . "'");
-      if ($result){
-          $row = $result->fetch_assoc();
-          return is_null($row['usr_id']) ? 0 : $row['usr_id'];
+      //$result = $this->handler->query("SELECT usr_id FROM auth_tokens WHERE expiration > NOW() AND token LIKE '". $_token . "'");
+      $authtoken = R::findOne('authtoken', 'expiration > now() AND token LIKE ?', [$_token]);      
+      if ($authtoken){          
+          return is_null($authtoken->user_id) ? 0 : $authtoken->user_id;
       }else{
           return 0;
       }
@@ -62,11 +56,29 @@ class Auth {
       $tries = 5;
       do {
         $token = bin2hex(openssl_random_pseudo_bytes(16));
-        $insertedToken = $this->handler->query("INSERT INTO auth_tokens (token, expiration, usr_id) VALUES ('".$token."', NOW() + INTERVAL 1 HOUR, " . $userid . ")");
+        //$insertedToken = $this->handler->query("INSERT INTO auth_tokens (token, expiration, usr_id) VALUES ('".$token."', NOW() + INTERVAL 1 HOUR, " . $userid . ")");
+        $token = R::dispense('authtoken');
+        $token->token = $token;
+        $token->expiration = date(DateTime::ISO8601, time() + (1 * 60 * 60));
+        $token->user_id = $userid;
+        $insertedToken = R::store($token);
         $tries--;
       } while (!$insertedToken && !$tries);
 
       return $token;
+    }
+
+    public function obsoleteToken($token) {
+      $_token = $this->token;
+      if (!is_null($token)) $_token = $token;
+      if (is_null($_token)) return false;
+      $authtoken = R::findOne('authtoken', 'expiration > now() AND token LIKE ?', [$_token]);      
+      if ($authtoken){
+          R::trash($authtoken);
+          return true;
+      }else{
+          return false;
+      };
     }
 
 // Authorization area

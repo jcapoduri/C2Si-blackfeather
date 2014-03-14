@@ -19,7 +19,7 @@ define([
         initialize = function (){
             main_view.render();
             Backbone.history.start();
-            application.setUp();
+            //application.setUp();
         },
         publicRegion = {
             initialize: function () {
