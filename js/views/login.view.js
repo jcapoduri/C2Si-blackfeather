@@ -39,6 +39,7 @@ define(['jquery',
         },
         showErrors: function (model, errors, options) {},
         login: function (evt) {
+            Raven.showLoader();
             this.model.save({
                 success: function(response) {
                     $.ajaxSetup({

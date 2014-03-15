@@ -9,6 +9,7 @@ class predicative {
     protected $negate = null;
     protected $and_others = array();
     protected $or_others = array();
+    protected $sort_fields = array();
 
     public function __construct($column, $filterType, $filterValue) {
         $this->column = $column;
@@ -37,7 +38,7 @@ class predicative {
         if ($and_query) $query .= " AND (" . $and_query . ")";
         if ($or_query) $query .= " OR (" . $or_query . ")";
         if (!is_null($this->negate)) $query .= " AND NOT (" . $this->negate->generateSQL() . ")";
-
+        $query = $query . $this->orderToSql();
         return $query;
     }
 
@@ -69,6 +70,18 @@ class predicative {
         return $query;
     }
 
+    protected function orderToSql() {
+        if (!count($this->sort_fields)) return "";
+
+        $query = "ORDER BY ";
+        $sortitems = array();
+
+        foreach ($this->sort_fields as $value) {
+            array_push($sortitems, "`" . $value["field"] . "`" . " " . ($value["order"] ? "ASC" : "DESC"));
+        }
+        return $query . join($sortitems, ", ");
+    }
+
     public function logical_and(predicative $other) {
         array_push($this->and_others, $other);
     }
@@ -79,6 +92,13 @@ class predicative {
 
     public function logical_not(predicative $other) {
         $this->negate = $other;
+    }
+
+    public function sortBy($field, $asc = true) {
+        $sortvalue = array();
+        $sortvalue["field"] = $field;
+        $sortvalue["order"] = $asc ? true : false;
+        array_push($this->sort_fields, $sortvalue);
     }
 };
 

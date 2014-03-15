@@ -10,7 +10,7 @@ date_default_timezone_set('UTC');
 // SLIM Framework, to provide REST capability and scalfolding
 require_once 'libs/Slim/Slim.php';
 // small propietary ORM
-require_once 'libs/nd/nd.php';
+require_once 'libs/RedBean/rb.phar';
 // small propietary Auth
 require_once 'libs/Auth/Auth.php';
 require_once 'libs/Auth/AuthMiddleware.php';
@@ -21,17 +21,12 @@ $app = new \Slim\Slim();
 
 error_reporting(E_ALL);
 
-// Nd settings up
-$config_data = file_get_contents('config/blackfeather.json');
-$config_json = json_decode($config_data, true);
-$system = new \nd\neodynium($config_json);
-$system->startApp("web");
-
 //set Auth middleware
-$app->add(new \c2si\AuthMiddleware($system));
+//$app->add(new AuthMiddleware());
 
+R::setup('mysql:host=localhost;dbname=test', 'root', '');
+R::nuke();
 // Noop - no operation (for testing)
-
 $app->get('/noop', function () use ($app){
     $response = $app->response();
     $response['Content-Type'] = 'application/json';
@@ -39,6 +34,20 @@ $app->get('/noop', function () use ($app){
 });
 
 require_once 'security/access.php';
+require_once 'security/register.php';
+
+//R::freeze(TRUE);
+
+$app->get('/user', function () use ($app) {
+	$response = $app->response();
+    $response['Content-Type'] = 'application/json';
+    //$users = R::find('newbusiness');
+    //$users = R::getAll( 'SELECT * FROM user' );
+    //$response->write(json_encode(R::exportAll($users)));
+    //$response->write(json_encode($users));
+    //$response->write("{}");
+    //var_dump(R::exec("SELECT * FROM user"));
+});
 
 // SLIM start point
 $app->run();

@@ -1,6 +1,6 @@
-define(['jquery', 'underscore', 'backbone', 'jquery_cookie', 'handlebars',], function($, _, Backbone, cookie, handlebars){
-    var startApp = function(module, subApp) {
-        module.init($("#main-container"), subApp);
+define(['jquery', 'underscore', 'backbone', 'jquery_cookie', 'app/application'], function($, _, Backbone, cookie, app){
+    var startApp = function(module) {
+        module.init($("#main-container"));
         Raven.hideLoader();
     };
 
@@ -44,7 +44,7 @@ define(['jquery', 'underscore', 'backbone', 'jquery_cookie', 'handlebars',], fun
           this.navigate('/login', {trigger: true});
         },
         defaultAction: function () {
-
+            Raven.app.setUp();
         },
         start: function () {
             require(['app/raven.app'], startApp);
