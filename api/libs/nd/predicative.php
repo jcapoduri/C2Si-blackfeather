@@ -52,7 +52,11 @@ class predicative {
                 $query .= " LIKE '%";
                 break;
             case "like":
+                  $query .=  " LIKE '%";
+                break;
             case "equal":
+                  $query .= " LIKE '%";
+                break;
             case "=":
                 $query .= is_numeric($this->filterValue) ? " = " : " LIKE '";
                 break;
