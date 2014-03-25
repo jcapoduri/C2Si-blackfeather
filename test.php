@@ -20,7 +20,10 @@
     echo $system->handler->errno;
     while ($rep = $res->fetch_assoc()) var_dump($rep);*/
 
-    $test = new \nd\persistence($system);
-    $test->generatePersistence();
+    /*$test = new \nd\persistence($system);
+    $test->generatePersistence();*/
+    $object = new stdClass();
+    $object->property = 'Here we go';
 
+    echo json_encode($system);
 ?>

@@ -7,7 +7,7 @@ $app->post('/register/user', function() use ($app) {
     $json = json_decode($app->request()->getBody(), true);
 
     //check for all values
-    $ok = true;    
+    $ok = true;
     $ok = $ok && isset($json['username']);
     $ok = $ok && isset($json['password']);
     $ok = $ok && isset($json['password2']);
@@ -40,7 +40,7 @@ $app->post('/register/user', function() use ($app) {
     $user->expiration = date(DateTime::ISO8601, time() + (7 * 24 * 60 * 60)); //one week
 
 	R::begin();
-	
+
     $id = R::store($user);
 
 	if ($id) {
@@ -58,27 +58,27 @@ $app->get('/register/user/:token', function($token) use ($app) {
     $response = $app->response();
     $response['Content-Type'] = 'application/json';
 
-    $token = R::findOne('user', 'token LIKE ?', [$token]);
+    $token = R::findOne('user', 'token LIKE ?', array($token));
     if ($token) {
         $app->response()->write();
     } else {
         $app->response()->status(500);
-        $app->response()->write(response::fail("invalid token")->toJson());  
+        $app->response()->write(response::fail("invalid token")->toJson());
     };
 });
 
-$app->post('/register/user', function() use ($app) {
+/*$app->post('/register/user', function() use ($app) {
     $response = $app->response();
-    $response['Content-Type'] = 'application/json';    
+    $response['Content-Type'] = 'application/json';
 
     $json = json_decode($app->request()->getBody(), true);
     $user = R::dispense('user');
     $user->import($json);
 
-    $token = R::findOne('user', 'token LIKE ? AND expiration > now()', [$user->token]);
+    $token = R::findOne('user', 'token LIKE ? AND expiration > now()', array($user->token));
     if (!$token) {
         $app->response()->status(500);
-        $app->response()->write(response::fail("invalid token")->toJson());  
+        $app->response()->write(response::fail("invalid token")->toJson());
         return;
     };
 
@@ -86,6 +86,6 @@ $app->post('/register/user', function() use ($app) {
 
     $id = R::store($user);
     $app->response()->write($id);
-});
+});*/
 
 ?>

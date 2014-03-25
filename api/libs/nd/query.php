@@ -24,7 +24,7 @@ class query {
     }
 
     /*
-    * to be implemented
+    *
     */
     public function relation($relation_name, $entity_name) {
         $this->isRelation = true;
@@ -70,12 +70,15 @@ class query {
         $this->predicative->logical_not($pred);
         return $this;
     }
-    
-      public function orderBy($column, $orderType, $query) {
+
+    /*
+    * refactor needed
+    */
+    public function orderBy($column, $orderType, $query) {
         $this->order = new order($column, $orderType);
         return $this;
     }
-    
+
 
     /*
     *

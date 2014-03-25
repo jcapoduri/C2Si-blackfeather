@@ -38,6 +38,21 @@ class persistence {
         $this->handler = $this->nd->handler;
     }
 
+    public function generateJSON($systemname, $appname) {
+        $json_generated = array(
+                "meta" => array(),
+                "config" => array(),
+                "objects" => array(),
+                "relations" => array(),
+                "storages" => array(),
+                "apps" => array(),
+            );
+
+        //get all tables
+
+        return json_encode($json_generated);
+    }
+
     public function generatePersistence() {
         //start a transaction
         $this->nd->handler->autocommit(false);
