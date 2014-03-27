@@ -39,29 +39,31 @@ define(['jquery',
         },
         showErrors: function (model, errors, options) {},
         login: function (evt) {
+            this.$el.find('input').change();
             Raven.showLoader();
             this.model.save({
                 success: function(response) {
                     $.ajaxSetup({
                         headers: { 'ACCESS_TOKEN': response }
-                    });
-                    $.cookie('ACCESS_TOKEN', response);
+                    });                    
                     Raven.router.navigate('/home', {trigger: true});
+                    Raven.hideLoader();
+                    $.cookie('ACCESS_TOKEN', response);
                 },
                 error: function() {
-                        bootbox.dialog({
-                          message: "Error al ingresar, compruebe usuario y password",
-                          title: "Error al ingreso",
-                          buttons: {
-                            main: {
-                              label: "Ok",
-                              className: "btn-primary",
-                              callback: function() {}
-                            }
-                          }
-                        });
-                        Raven.hideLoader();
-                    }
+                    bootbox.dialog({
+                      message: "Error al ingresar, compruebe usuario y password",
+                      title: "Error al ingreso",
+                      buttons: {
+                        main: {
+                          label: "Ok",
+                          className: "btn-primary",
+                          callback: function() {}
+                        }
+                      }
+                    });
+                    Raven.hideLoader();
+                }
             });
             evt.preventDefault();
             return false;

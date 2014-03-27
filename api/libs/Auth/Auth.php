@@ -55,7 +55,7 @@ class Auth {
       $insertedToekn = false;
       $tries = 5;
       do {
-        $randtoken = bin2hex(openssl_random_pseudo_bytes(16));
+        $randtoken = md5(rand());
         //$insertedToken = $this->handler->query("INSERT INTO auth_tokens (token, expiration, usr_id) VALUES ('".$token."', NOW() + INTERVAL 1 HOUR, " . $userid . ")");
         $token = R::dispense('authtoken');
         $token->token = $randtoken;

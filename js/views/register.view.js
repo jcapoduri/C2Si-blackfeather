@@ -49,9 +49,38 @@ define(['jquery',
         },
         showErrors: function (model, errors, options) {},
         register: function (evt) {
+            this.$el.find('input').change();
+            Raven.showLoader();
             this.model.save(this.model.toJSON(), {
-                success: function () {},
-                error: function () {}
+                success: function () {
+                    bootbox.dialog({
+                      message: "Se ha registrado exitosamente, por favor compruebe el correo que proporciono para terminar de verificar la cuenta",
+                      title: "Registro Exitoso!",
+                      buttons: {
+                        main: {
+                          label: "Ok",
+                          className: "btn-primary",
+                          callback: function() {}
+                        }
+                      }
+                    });
+                    Raven.hideLoader();
+                },
+                error: function (model, response) {
+                    errData = JSON.parse(response.responseText);
+                    bootbox.dialog({
+                      message: errData.message,
+                      title: "Error al registrarse",
+                      buttons: {
+                        main: {
+                          label: "Ok",
+                          className: "btn-primary",
+                          callback: function() {}
+                        }
+                      }
+                    });
+                    Raven.hideLoader();
+                }
             });
 
             evt.preventDefault();

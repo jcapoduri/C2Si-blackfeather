@@ -57,8 +57,8 @@ error_reporting(E_ALL);
 //set Auth middleware
 //$app->add(new AuthMiddleware());
 
-//R::setup('mysql:host=localhost;dbname=test', 'root', '');
-R::setup('mysql:host=127.11.188.129;dbname=c9', 'jcapoduri', '');
+R::setup('mysql:host=localhost;dbname=blackfeather', 'root', '');
+//R::setup('mysql:host=127.11.188.129;dbname=c9', 'jcapoduri', '');
 //R::nuke();
 // Noop - no operation (for testing)
 $app->get('/noop', function () use ($app){
@@ -72,16 +72,6 @@ require_once 'security/register.php';
 
 //R::freeze(TRUE);
 
-$app->get('/user', function () use ($app) {
-	$response = $app->response();
-    $response['Content-Type'] = 'application/json';
-    //$users = R::find('newbusiness');
-    //$users = R::getAll( 'SELECT * FROM user' );
-    //$response->write(json_encode(R::exportAll($users)));
-    //$response->write(json_encode($users));
-    //$response->write("{}");
-    //var_dump(R::exec("SELECT * FROM user"));
-});
 
 // SLIM start point
 $app->run();

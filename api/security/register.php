@@ -23,11 +23,11 @@ $app->post('/register/user', function() use ($app) {
     //validatiokn
     $err_validation = "";
     if ($json['password'] !== $json['password2'])  $err_validation = "Passwords no coinciden";
-    if ($json['email'] !== $json['email2'])  $err_validation = "Passwords no coinciden";
+    if ($json['email'] !== $json['email2'])  $err_validation = "emails no coinciden";
 
     if ($err_validation !== "") {
         $app->response()->status(500);
-        $app->response()->write(\nd\response::fail("invalid data")->toJson());
+        $app->response()->write(\nd\response::fail($err_validation)->toJson());
         return;
     };
 

@@ -37,12 +37,18 @@ $app->get('/my', function () use ($app) {
     $auth = new Auth();
 
     $token = $app->request->headers->get('ACCESS_TOKEN');
+    $headers = getallheaders();
+    $token = $headers["ACCESS_TOKEN"];
     $userid = $auth->getUserId($token);
 
-    $user = R::load("user", $userid);
-
-    $app->response['Content-Type'] = 'application/json';
-    $app->response->write(json_encode($user->export()));
+    if ($userid != 0) {
+        $user = R::load("user", $userid);
+        $app->response['Content-Type'] = 'application/json';
+        $app->response->write(json_encode($user->export()));
+    } else {
+        $app->response()->status(500);
+        $app->response()->write(response::fail("invalid token")->toJson());  
+    };
 });
 
 ?>
