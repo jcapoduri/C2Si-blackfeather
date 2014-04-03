@@ -23,7 +23,11 @@ $app->post('/login', function () use ($app) {
 $app->post('/logout', function () use ($app) {
     $auth = new Auth();
     $token = $app->request->headers->get('ACCESS_TOKEN');
+    $headers = getallheaders();
+    $token = $headers["ACCESS_TOKEN"];
+
     if (!$token) $token = $app->getCookie('ACCESS_TOKEN');
+    
     if ($auth->obsoleteToken($token)) {
         $app->response()->write(response::pass("logout succefully")->toJson());
     } else {

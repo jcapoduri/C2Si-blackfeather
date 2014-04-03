@@ -11,8 +11,7 @@ require(
         'app/application'
       ],
       function(Backbone, Application) {
-          window.Raven = null;
-          window.Raven = new Application();
+          window.Raven = Application;
           window.Raven.initialize();
       });
   }

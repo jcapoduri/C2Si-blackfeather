@@ -43,5 +43,5 @@ define([
         return publicRegion;
     };
 
-    return application;
+    return new application();
 });

@@ -8,19 +8,19 @@ define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
         validate: function (attrs) {
             var error = {};
 
-		    if (attrs.password) {
-		        if (attrs.password.length < 8) {
-		            error.password = "password demasiado corto";
-		        }
-		    };
+			if (attrs.password) {
+				if (attrs.password.length < 8) {
+					error.password = "password demasiado corto";
+				}
+			}
 
-		    if (attrs.password2) {
-		        if (attrs.password.length < 8) {
-		            error.password = "password demasiado corto";
-		        }
-		    };
+			if (attrs.password2) {
+				if (attrs.password.length < 8) {
+					error.password = "password demasiado corto";
+				}
+			}
 
-		    if (!_.isEmpty(error)) return error;
+			if (!_.isEmpty(error)) return error;
         }
     });
 
