@@ -6,7 +6,7 @@ dev:
     pass: "abcd1234"
     check: true
     revision: "test"
-    exclude: ["*.yaml", "*.json", "mockups/**/*.js", "nd/**/*.js", "**/*.md"]
+    exclude: ["*.yaml", "*.json", "mockups/**/*.js", "nd/**/*.js", "**/*.md", "node_modules/**/*.*", "vendor/**/*.*"]
     path:
         remote: "public_html/dblackfeather/"
 
