@@ -14,10 +14,6 @@ class AuthMiddleware extends \Slim\Middleware
 
     /**
      * Call
-     *
-     * This method will check the HTTP request headers for previous authentication. If
-     * the request has already authenticated, the next middleware is called. Otherwise,
-     * a 401 Authentication Required response is returned to the client.
      */
     public function call()
     {
@@ -29,7 +25,8 @@ class AuthMiddleware extends \Slim\Middleware
         $ok = $this->auth->authentificate($request->headers->get('ACCESS_TOKEN'));
         if (!$ok) {
           $response->status(401);
-          $response->write($request->getResourceUri());                  } else {
+          $response->write($request->getResourceUri());                  
+        } else {
             $this->next->call();
         };
       } else {

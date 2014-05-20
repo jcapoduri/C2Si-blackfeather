@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 dev:
     scheme: ftp
     host: dblackfeather.c2si.com.ar
@@ -21,3 +22,28 @@ stage:
     path:
         local: 'bin/'
         remote: "public_html/qblackfeather"
+=======
+dev:
+    scheme: ftp
+    host: dblackfeather.c2si.com.ar
+    port: 21
+    user: "shaka"
+    pass: "abcd1234"
+    check: true
+    revision: "test"
+    exclude: ["*.yaml", "*.json", "mockups/**/*.js", "nd/**/*.js", "**/*.md"]
+    path:
+        remote: "public_html/dblackfeather/"
+
+
+stage:
+    scheme: ftp
+    host: qblackfeather.c2si.com.ar
+    port: 21
+    user: shaka
+    pass: abcd1234
+    check: true
+    path:
+        local: 'bin/'
+        remote: "public_html/qblackfeather"
+>>>>>>> 681ce6362a59816d0f1a5c399f23abdda0138cd3
