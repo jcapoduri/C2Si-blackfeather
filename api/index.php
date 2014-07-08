@@ -32,11 +32,17 @@ error_reporting(E_ALL);
 //set Auth middleware
 //$app->add(new AuthMiddleware());
 
-R::setup('mysql:host=localhost;dbname=blackfeather', 'root', 'Kotipelto.46');
-//R::setup('mysql:host=127.11.188.129;dbname=c9', 'jcapoduri', '');
+//R::setup('mysql:host=localhost;dbname=blackfeather', 'root', 'Kotipelto.46');
+R::setup('mysql:host=127.7.229.1;dbname=c9', 'jcapoduri', '');
 //R::nuke();
 // Noop - no operation (for testing)
 $app->get('/noop', function () use ($app){
+    $response = $app->response();
+    $response['Content-Type'] = 'application/json';
+    $response->write('{}');
+});
+
+$app->get('/', function () use ($app){
     $response = $app->response();
     $response['Content-Type'] = 'application/json';
     $response->write('{}');

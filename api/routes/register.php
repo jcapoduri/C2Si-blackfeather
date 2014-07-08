@@ -8,7 +8,7 @@ $app->group('/register', function() use ($app) {
         $response = $app->response();
         $response['Content-Type'] = 'application/json';
 
-        $json = json_decode($app->request()->getBody(), true);    
+        $json = json_decode($app->request()->getBody());
 
         $bean = R::dispense("register");
         try {
@@ -19,7 +19,7 @@ $app->group('/register', function() use ($app) {
             $app->response()->status(500);
             $app->response()->write(response::fail($e->getMessage())->toJson());
         };
-        
+
     });
 
     $app->get('/user/:token', function($token) use ($app) {
@@ -29,7 +29,7 @@ $app->group('/register', function() use ($app) {
         } else {
             $app->response()->status(500);
             $app->response()->write(response::fail("invalid token")->toJson());
-        };    
+        };
     });
 
     // Generate User

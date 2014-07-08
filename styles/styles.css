@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 html{
   height: 100%;
 }
@@ -11,11 +10,13 @@ body {
   /*background: radial-gradient(farthest-side ellipse at 10% 0, rgba(102,105,104,0.9),rgba(93,112,119,0.89),rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");
   background: -webkit-radial-gradient(10% 0, farthest-side ellipse, rgba(102,105,104,0.9), rgba(93,112,119,0.89), rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");
   background: -moz-radial-gradient(10% 0, farthest-side ellipse, rgba(102,105,104,0.9), rgba(93,112,119,0.89), rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");*/
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-top: 70px;
 }
 
-body article {
-    margin-top: 15px;
+.header-search {
+    margin: 5px 0;
 }
 
 /* loading section */
@@ -53,12 +54,6 @@ body article {
   margin-right: -0.25em; /* Adjusts for spacing */
 }
 
-/* The element to be centered, can
-   also be of any width and height */
-.centered {
-  display: inline-block;
-  vertical-align: middle;
-}
 
 .editable {
 }
@@ -150,146 +145,4 @@ ul.navlist > li {
     top:0px;
     left:0px;
     z-index:1000;
-=======
-html{
-  height: 100%;
-}
-
-body {
-  min-height: 100%;
-  min-height: 100%;
-  /background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…gd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4="),url("assets/bgnoise_lg_dark.png");
-  background-color: rgba(102,105,104,0.9);
-  /*background: radial-gradient(farthest-side ellipse at 10% 0, rgba(102,105,104,0.9),rgba(93,112,119,0.89),rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");
-  background: -webkit-radial-gradient(10% 0, farthest-side ellipse, rgba(102,105,104,0.9), rgba(93,112,119,0.89), rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");
-  background: -moz-radial-gradient(10% 0, farthest-side ellipse, rgba(102,105,104,0.9), rgba(93,112,119,0.89), rgba(160,174,150,0.9)),url("../assets/bgnoise_lg_dark.png");*/
-  overflow: hidden;
-}
-
-body article {
-    margin-top: 15px;
-}
-
-/* loading section */
-.loader {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-}
-
-.loader img {
-    position: absolute;
-    top: 50vh;
-    left: 50vw;
-    margin-left: -48px;
-    margin-top: -48px;
-}
-
-/* This parent can be any width and height */
-.block {
-  text-align: center;
-  height: 95vh;
-}
-
-/* The ghost, nudged to maintain perfect centering */
-.block:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -0.25em; /* Adjusts for spacing */
-}
-
-/* The element to be centered, can
-   also be of any width and height */
-.centered {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.editable {
-}
-
-.editable .viewWidget {
-
-}
-
-.editable .editWidget {
-
-}
-
-aside {
-    background: linear-gradient(to right,#3a3633 93%,#2a2725 100%);
-    height: 96vh;
-}
-
-aside#side-widget{
-    transition: margin-left 1s;
-    -webkit-transition: margin-left 1s; /* Safari */
-    margin-left: -13%;
-    overflow: hidden;
-    padding-right: 0;
-}
-
-aside#side-widget:hover{
-    transition: margin-left 1s;
-    -webkit-transition: margin-left 1s; /* Safari */
-    margin-left: 0;
-    overflow: hidden;
-}
-
-.main-container {
-  height: 95vh;
-  overflow: scroll;
-}
-
-ul.navlist {
-    list-style: none;
-    width: 100%;
-    padding: 0;
-}
-
-ul.navlist > li {
-    display: block;
-    min-height: 20px;
-    padding: 5px 10px 5px 10px;
-    border-bottom: 1px #666 solid;
-    color: #666;
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
-
-.tile {
-  max-width: 330px;
-  min-height: 200px;
-  height: 200px;
-  padding: 15px;
-  margin: 0 auto;
-}
-
-.tile > div {
-  color: #ffffff;
-  background-color: #008cba;
-  background-image: linear-gradient(rgb(66, 139, 202) 0%, rgb(53, 126, 189) 100%);
-  border-color: #008cba;
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
-  font-size: 26px;
-  margin-top: 21px;
-  margin-bottom: 10.5px;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  line-height: 1.1;
->>>>>>> 681ce6362a59816d0f1a5c399f23abdda0138cd3
 }

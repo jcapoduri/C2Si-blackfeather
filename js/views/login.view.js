@@ -41,11 +41,11 @@ define(['jquery',
         login: function (evt) {
             this.$el.find('input').change();
             Raven.showLoader();
-            this.model.save({
+            this.model.save({}, {
                 success: function(response) {
                     $.ajaxSetup({
                         headers: { 'ACCESS_TOKEN': response }
-                    });                    
+                    });
                     Raven.router.navigate('/home', {trigger: true});
                     Raven.hideLoader();
                     $.cookie('ACCESS_TOKEN', response);

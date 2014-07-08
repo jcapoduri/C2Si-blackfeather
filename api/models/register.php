@@ -8,38 +8,37 @@ class Model_Register extends RESTorm {
         $ok = true;
         $err_validation = "";
 
-
         $ok = $ok && isset($json->username);
         $ok = $ok && isset($json->password);
         $ok = $ok && isset($json->password2);
         $ok = $ok && isset($json->email);
         $ok = $ok && isset($json->email2);
 
-        if (!$ok){            
+        if (!$ok){
             return "invalid JSON";
         };
-        
+
         if ($json->password !== $json->password2)  $err_validation = "Passwords no coinciden";
         if ($json->email !== $json->email2)  $err_validation = "emails no coinciden";
 
-        if (ereg("^[A-Za-z0-9_]{8,}$", $json->username)) {
+        if (!preg_match('/^[0-9A-Za-z!@#$%_\-]{4,}$/', $json->username)) {
             return "invalid username";
         };
 
-        if (ereg("^[A-Za-z0-9_]{8,}$", $json->password)) {
+        if (!preg_match('/^[0-9A-Za-z!@#$%_\-]{8,}$/', $json->password)) {
             return "invalid password";
         };
 
-        $email = filter_var($json->email, FILTER_VALIDATE_EMAIL | FILTER_SANITIZE_EMAIL);
+        $email = filter_var($json->email, FILTER_VALIDATE_EMAIL);
         if (!$email) {
             return "invalid email";
         }
-        
+
         return "";
     }
 
     public function fromJSON($data) {
-        $status = validate($data);
+        $status = $this->validate($data);
         if ($status) {
             throw new ValidationException($status);
         };
