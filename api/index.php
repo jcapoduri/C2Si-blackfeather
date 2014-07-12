@@ -13,7 +13,7 @@ require_once 'libs/Auth/Auth.php';
 require_once 'libs/Auth/AuthMiddleware.php';
 
 // models
-foreach (glob("models/*.php") as $filename)
+foreach (glob("models/*.model.php") as $filename)
 {
     require_once $filename;
 };
@@ -48,15 +48,13 @@ $app->get('/', function () use ($app){
     $response->write('{}');
 });
 
-foreach (glob("routes/*.php") as $filename)
+foreach (glob("routes/*.route.php") as $filename)
 {
     require_once $filename;
 };
 //R::freeze(TRUE);
 
-
 // SLIM start point
 $app->run();
-
 
 ?>
